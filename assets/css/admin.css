@@ -1,0 +1,58 @@
+/* Code Mirror */
+.CodeMirror-wrap {
+	border: 1px solid #ddd;
+}
+
+/* Override heatbox */
+.heatbox-header .logo-container img {
+	width: 180px;
+}
+
+/* PRO styling */
+.wooquickview-pro-settings-page-notice {
+	display: inline-block;
+	padding-top: 10px;
+	margin-top: 20px;
+	border-top: 1px solid #ddd;
+}
+
+.wooquickview-pro-settings-page-notice p {
+	font-style: italic;
+	display: block;
+	margin: 0 !important;
+}
+
+.wooquickview-pro-settings-page-notice .button {
+	margin-top: 10px !important;
+}
+
+/* Featured */
+.wooquickview-featured-products > h2 {
+	text-align: center;
+	margin-bottom: 50px;
+	font-size: 24px;
+}
+
+.wooquickview-featured-products .products {
+	display: flex;
+	justify-content: space-between;
+}
+
+.wooquickview-featured-products .products li {
+	width: 32%;
+}
+
+.wooquickview-featured-products .products .subheadline {
+	font-weight: 600;
+	margin-top: -6px;
+}
+
+.wooquickview-featured-products .products img {
+	max-width: 100%;
+}
+
+.wooquickview-featured-products .credit {
+	margin-top: 20px;
+	text-align: center;
+	opacity: .5;
+}
