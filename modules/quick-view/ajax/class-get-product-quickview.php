@@ -32,11 +32,11 @@ class Get_Product_Quickview {
 			wp_send_json_error( __( 'Invalid token', 'woocommerce-quick-view' ) );
 		}
 
-		if ( ! isset( $_POST['product_id'] ) || ! $_POST['product_id'] ) {
+		if ( ! isset( $_GET['product_id'] ) || ! $_GET['product_id'] ) {
 			wp_send_json_error( __( 'Product id is required', 'woocommerce-quick-view' ) );
 		}
 
-		$this->product_id = absint( $_POST['product_id'] );
+		$this->product_id = absint( $_GET['product_id'] );
 
 		if ( ! get_post( $this->product_id ) ) {
 			wp_send_json_error( __( "Product doesn't exist", 'woocommerce-quick-view' ) );

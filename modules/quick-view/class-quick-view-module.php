@@ -66,6 +66,12 @@ class Quick_View_Module extends Base_Module {
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_scripts' ) );
 
+		$this->setup_ajax();
+
+		// The module output.
+		require_once __DIR__ . '/class-quick-view-output.php';
+		Quick_View_Output::init();
+
 	}
 
 	/**
@@ -100,12 +106,6 @@ class Quick_View_Module extends Base_Module {
 		wp_enqueue_style( 'wooquickview-admin', WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION );
 		wp_enqueue_style( 'wooquickview-quick-view', $this->url . '/assets/css/quick-view.css', array( 'wooquickview-admin' ), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION );
 
-		$this->setup_ajax();
-
-		// The module output.
-		require_once __DIR__ . '/class-quick-view-output.php';
-		Quick_View_Output::init();
-
 	}
 
 	/**
@@ -114,11 +114,16 @@ class Quick_View_Module extends Base_Module {
 	public function setup_ajax() {
 
 		require_once __DIR__ . '/ajax/class-get-product-quickview.php';
+		require_once __DIR__ . '/ajax/class-add-to-cart.php';
 
 		$get_quickview = new Ajax\Get_Product_Quickview();
+		$add_to_cart   = new Ajax\Add_To_Cart();
 
 		add_action( 'wp_ajax_wooquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
 		add_action( 'wp_ajax_nopriv_wooquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
+
+		add_action( 'wp_ajax_add_to_cart', array( $add_to_cart, 'ajax' ) );
+		add_action( 'wp_ajax_nopriv_add_to_cart', array( $add_to_cart, 'ajax' ) );
 
 	}
 
@@ -149,7 +154,20 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_scripts() {
 
-		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array(), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION, true );
+
+		wp_localize_script(
+			'wooquickview-quick-view',
+			'wooquickviewObj',
+			array(
+				'loader'  => WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/assets/images/loader.gif',
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'nonces'  => array(
+					'getQuickview' => wp_create_nonce( 'wooquickview_get_product_quickview' ),
+					'addToCart'    => wp_create_nonce( 'wooquickview_add_to_cart' ),
+				),
+			)
+		);
 
 	}
 
