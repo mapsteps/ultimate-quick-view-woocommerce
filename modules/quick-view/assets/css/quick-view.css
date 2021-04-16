@@ -40,6 +40,8 @@
 	opacity: 1;
 }
 
+.product a.wooquickview-button,
+.product button.wooquickview-button,
 .product .wooquickview-button {
 	position: relative;
 	display: inline-flex;
@@ -62,10 +64,10 @@
 	width: 1em;
 	display: block;
 	height: 1em;
-	/* border: 2px solid #dbdbdb; */
-	border: 2px solid #814676;
-	/* border-color: transparent transparent #fff #fff !important; */
-	border-color: transparent transparent #9B5C8F #9B5C8F !important;
+	border: 2px solid #dbdbdb;
+	/* border: 2px solid #814676; */
+	border-color: transparent transparent #fff #fff !important;
+	/* border-color: transparent transparent #9B5C8F #9B5C8F !important; */
 	border-radius: 290486px;
 	-webkit-animation: loadingSpinAround 0.5s infinite linear;
 	animation: loadingSpinAround 0.5s infinite linear;

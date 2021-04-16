@@ -63,7 +63,7 @@ class Quick_View_Module extends Base_Module {
 		add_action( 'admin_enqueue_scripts', array( self::get_instance(), 'admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( self::get_instance(), 'admin_scripts' ) );
 
-		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_styles' ), 20 );
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_scripts' ) );
 
 		$this->setup_ajax();

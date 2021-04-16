@@ -86,7 +86,9 @@
 
 			openQuickViewPopup();
 
-			// Variation Form
+			var addToCartButton = popupProduct.querySelector('.single_add_to_cart_button');
+			if (addToCartButton) addToCartButton.classList.add('wooquickview-button');
+
 			var variationForms = popupProduct.querySelectorAll('.variations_form');
 
 			variationForms.forEach(function (form) {
@@ -204,7 +206,10 @@
 			}
 		).done(function (r) {
 			$(document.body).trigger('wc_fragment_refresh');
-			$(document.body).trigger('added_to_cart');
+
+			var $defaultAddToCartButton = $('.product .add_to_cart_button[data-product_id="' + productId + '"]');
+
+			$(document.body).trigger('added_to_cart', [{}, '', $defaultAddToCartButton]);
 		}).fail(function (jqXHR) {
 			console.error(buildErrorMsg(jqXHR));
 		}).always(function () {
