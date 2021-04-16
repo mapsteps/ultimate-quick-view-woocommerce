@@ -35,7 +35,7 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function __construct() {
 
-		$this->url = WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/modules/quick-view';
+		$this->url = QUICK_VIEW_ULTIMATE_PLUGIN_URL . '/modules/quick-view';
 
 	}
 
@@ -102,9 +102,9 @@ class Quick_View_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_style( 'heatbox', WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/assets/css/heatbox.css', array(), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION );
-		wp_enqueue_style( 'wooquickview-admin', WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION );
-		wp_enqueue_style( 'wooquickview-quick-view', $this->url . '/assets/css/quick-view.css', array( 'wooquickview-admin' ), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'heatbox', QUICK_VIEW_ULTIMATE_PLUGIN_URL . '/assets/css/heatbox.css', array(), QUICK_VIEW_ULTIMATE_PLUGIN_VERSION );
+		wp_enqueue_style( 'wooquickview-admin', QUICK_VIEW_ULTIMATE_PLUGIN_URL . '/assets/css/admin.css', array(), QUICK_VIEW_ULTIMATE_PLUGIN_VERSION );
+		wp_enqueue_style( 'wooquickview-quick-view', $this->url . '/assets/css/quick-view.css', array( 'wooquickview-admin' ), QUICK_VIEW_ULTIMATE_PLUGIN_VERSION );
 
 	}
 
@@ -136,7 +136,7 @@ class Quick_View_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array(), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array(), QUICK_VIEW_ULTIMATE_PLUGIN_VERSION, true );
 
 	}
 
@@ -145,7 +145,7 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_styles() {
 
-		wp_enqueue_style( 'wooquickview-quick-view', $this->url . '/assets/css/quick-view.css', array(), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'wooquickview-quick-view', $this->url . '/assets/css/quick-view.css', array(), QUICK_VIEW_ULTIMATE_PLUGIN_VERSION );
 
 	}
 
@@ -154,13 +154,13 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_scripts() {
 
-		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), QUICK_VIEW_ULTIMATE_PLUGIN_VERSION, true );
 
 		wp_localize_script(
 			'wooquickview-quick-view',
 			'wooquickviewObj',
 			array(
-				'loader'  => WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/assets/images/loader.gif',
+				'loader'  => QUICK_VIEW_ULTIMATE_PLUGIN_URL . '/assets/images/loader.gif',
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'nonces'  => array(
 					'getQuickview' => wp_create_nonce( 'wooquickview_get_product_quickview' ),

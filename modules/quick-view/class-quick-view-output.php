@@ -35,7 +35,7 @@ class Quick_View_Output extends Base_Output {
 	 */
 	public function __construct() {
 
-		$this->url = WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL . '/modules/feature';
+		$this->url = QUICK_VIEW_ULTIMATE_PLUGIN_URL . '/modules/feature';
 
 	}
 

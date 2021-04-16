@@ -21,13 +21,13 @@ return function () {
 					<div>
 						<span class="title">
 							<?php _e( 'Woocommerce Quick View', 'woocommerce-quick-view' ); ?>
-							<span class="version"><?php echo esc_html( WOOCOMMERCE_QUICK_VIEW_PLUGIN_VERSION ); ?></span>
+							<span class="version"><?php echo esc_html( QUICK_VIEW_ULTIMATE_PLUGIN_VERSION ); ?></span>
 						</span>
 						<p class="subtitle"><?php _e( 'The #1 plugin to quick view your Woocommerce products.', 'woocommerce-quick-view' ); ?></p>
 					</div>
 
 					<div>
-						<img src="<?php echo esc_url( WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL ); ?>/assets/images/woocommerce-quick-view.png">
+						<img src="<?php echo esc_url( QUICK_VIEW_ULTIMATE_PLUGIN_URL ); ?>/assets/images/woocommerce-quick-view.png">
 					</div>
 
 				</div>
@@ -67,7 +67,7 @@ return function () {
 			<ul class="products">
 				<li class="heatbox">
 					<a href="https://wordpress.org/plugins/swift-control/" target="_blank">
-						<img src="<?php echo esc_url( WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL ); ?>/assets/images/swift-control.jpg">
+						<img src="<?php echo esc_url( QUICK_VIEW_ULTIMATE_PLUGIN_URL ); ?>/assets/images/swift-control.jpg">
 					</a>
 					<div class="heatbox-content">
 						<h3><?php _e( 'WP Swift Control', 'woocommerce-quick-view' ); ?></h3>
@@ -78,7 +78,7 @@ return function () {
 				</li>
 				<li class="heatbox">
 					<a href="https://wordpress.org/plugins/ultimate-dashboard/" target="_blank">
-						<img src="<?php echo esc_url( WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL ); ?>/assets/images/ultimate-dashboard.jpg">
+						<img src="<?php echo esc_url( QUICK_VIEW_ULTIMATE_PLUGIN_URL ); ?>/assets/images/ultimate-dashboard.jpg">
 					</a>
 					<div class="heatbox-content">
 						<h3><?php _e( 'Ultimate Dashboard', 'woocommerce-quick-view' ); ?></h3>
@@ -89,7 +89,7 @@ return function () {
 				</li>
 				<li class="heatbox">
 					<a href="https://wordpress.org/plugins/responsive-youtube-vimeo-popup/" target="_blank">
-						<img src="<?php echo esc_url( WOOCOMMERCE_QUICK_VIEW_PLUGIN_URL ); ?>/assets/images/wp-video-popup.jpg">
+						<img src="<?php echo esc_url( QUICK_VIEW_ULTIMATE_PLUGIN_URL ); ?>/assets/images/wp-video-popup.jpg">
 					</a>
 					<div class="heatbox-content">
 						<h3><?php _e( 'WP Video Popup', 'woocommerce-quick-view' ); ?></h3>
