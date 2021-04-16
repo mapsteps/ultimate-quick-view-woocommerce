@@ -87,7 +87,7 @@ class Quick_View_Output extends Base_Output {
 		$product_id = $product->get_id();
 		?>
 
-		<a href="javascript:void(0)" id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button wooquickview-button wooquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
+		<a href="javascript:void(0)" id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uwquickview-button uwquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
 			<?php echo esc_attr( apply_filters( 'uwquickview_view_label', __( 'Quick View', 'ultimate-woo-quick-view' ) ) ); ?>
 		</a>
 		<?php
@@ -103,11 +103,11 @@ class Quick_View_Output extends Base_Output {
 		$this->enqueue_scripts();
 		?>
 
-		<div class="wooquickview-popup">
-			<span class="wooquickview-close-popup"></span>
+		<div class="uwquickview-popup">
+			<span class="uwquickview-close-popup"></span>
 
-			<div class="wooquickview-popup-content">
-				<div id="wooquickview-popup-product" class="woocommerce single-product"></div>
+			<div class="uwquickview-popup-content">
+				<div id="uwquickview-popup-product" class="woocommerce single-product"></div>
 			</div>
 		</div>
 

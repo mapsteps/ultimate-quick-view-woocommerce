@@ -92,7 +92,7 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_styles() {
 
-		wp_enqueue_style( 'wooquickview-quick-view', $this->url . '/assets/css/quick-view.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'uwquickview-quick-view', $this->url . '/assets/css/quick-view.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
 
 	}
 
@@ -101,11 +101,11 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_scripts() {
 
-		wp_enqueue_script( 'wooquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uwquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
 
 		wp_localize_script(
-			'wooquickview-quick-view',
-			'wooquickviewObj',
+			'uwquickview-quick-view',
+			'uwquickviewObj',
 			array(
 				'loader'  => ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/images/loader.gif',
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),

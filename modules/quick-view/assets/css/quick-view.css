@@ -16,7 +16,7 @@
 	}
 }
 
-.xwooquickview-view-button {
+.xuwquickview-view-button {
 	position: absolute;
 	bottom: 10px;
 	left: 10px;
@@ -32,17 +32,17 @@
 	font-size: 1em;
 }
 
-.xwooquickview-view-button:hover {
+.xuwquickview-view-button:hover {
 	color: #fff;
 }
 
-.xproduct:hover .wooquickview-view-button {
+.xproduct:hover .uwquickview-view-button {
 	opacity: 1;
 }
 
-.product a.wooquickview-button,
-.product button.wooquickview-button,
-.product .wooquickview-button {
+.product a.uwquickview-button,
+.product button.uwquickview-button,
+.product .uwquickview-button {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
@@ -52,13 +52,13 @@
 	user-select: none;
 }
 
-.product .wooquickview-button.is-loading {
+.product .uwquickview-button.is-loading {
 	justify-content: center;
 	color: transparent !important;
 	pointer-events: none;
 }
 
-.product .wooquickview-button.is-loading::after {
+.product .uwquickview-button.is-loading::after {
 	content: "";
 	position: absolute;
 	width: 1em;
@@ -73,7 +73,7 @@
 	animation: loadingSpinAround 0.5s infinite linear;
 }
 
-.wooquickview-popup {
+.uwquickview-popup {
 	display: none;
 	align-items: center;
 	justify-content: center;
@@ -87,7 +87,7 @@
 	z-index: 999;
 }
 
-.wooquickview-close-popup {
+.uwquickview-close-popup {
 	position: absolute;
 	display: inline-block;
 	right: 21px;
@@ -102,8 +102,8 @@
 	transition: 0.2s opacity;
 }
 
-.wooquickview-close-popup::before,
-.wooquickview-close-popup::after {
+.uwquickview-close-popup::before,
+.uwquickview-close-popup::after {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -115,19 +115,19 @@
 	border-radius: 1px;
 }
 
-.wooquickview-close-popup::before {
+.uwquickview-close-popup::before {
 	transform: rotate(45deg);
 }
 
-.wooquickview-close-popup::after {
+.uwquickview-close-popup::after {
 	transform: rotate(-45deg);
 }
 
-.wooquickview-close-popup:hover {
+.uwquickview-close-popup:hover {
 	opacity: 1;
 }
 
-.wooquickview-popup-content {
+.uwquickview-popup-content {
 	margin-left: auto;
 	margin-right: auto;
 	width: 900px;
@@ -138,15 +138,15 @@
 	z-index: 9999;
 }
 
-.wooquickview-popup-content div.product div.images {
+.uwquickview-popup-content div.product div.images {
 	margin-bottom: 0;
 }
 
-.wooquickview-popup-content div.product div.summary {
+.uwquickview-popup-content div.product div.summary {
 	margin-bottom: 0;
 	padding: 40px;
 }
 
-.wooquickview-popup-content div.product figure {
+.uwquickview-popup-content div.product figure {
 	margin-bottom: 0;
 }

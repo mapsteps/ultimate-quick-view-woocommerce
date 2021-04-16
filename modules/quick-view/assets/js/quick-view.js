@@ -2,11 +2,11 @@
  * Quick view functionality.
  * 
  * Used global objects:
- * - wooquickviewObj
+ * - uwquickviewObj
  */
 (function ($) {
-	var popup = document.querySelector('.wooquickview-popup');
-	var popupProduct = document.querySelector('#wooquickview-popup-product');
+	var popup = document.querySelector('.uwquickview-popup');
+	var popupProduct = document.querySelector('#uwquickview-popup-product');
 	if (!popup || !popupProduct) return;
 
 	var $popup = $(popup);
@@ -29,14 +29,14 @@
 	 * Setup the popup.
 	 */
 	function setupPopup() {
-		$(document).on('click', '.wooquickview-view-button', loadQuickView);
+		$(document).on('click', '.uwquickview-view-button', loadQuickView);
 
 		// Close popup by clicking on close button.
-		$(document).on('click', '.wooquickview-close-popup', closeQuickViewPopup);
+		$(document).on('click', '.uwquickview-close-popup', closeQuickViewPopup);
 
 		// Close popup by clicking on the overlay.
 		document.addEventListener('click', function (e) {
-			if (e.target.classList.contains('wooquickview-popup') && $popup.is(":visible")) {
+			if (e.target.classList.contains('uwquickview-popup') && $popup.is(":visible")) {
 				closeQuickViewPopup();
 			}
 		});
@@ -47,7 +47,7 @@
 			if ($popup.is(':visible')) closeQuickViewPopup();
 		});
 
-		$(document).on('click', '.wooquickview-popup-content .product:not(.product-type-external) .single_add_to_cart_button', addToCart);
+		$(document).on('click', '.uwquickview-popup-content .product:not(.product-type-external) .single_add_to_cart_button', addToCart);
 	}
 
 	loading.start = function (button) {
@@ -73,13 +73,13 @@
 		loading.start(this);
 
 		$.ajax({
-			url: wooquickviewObj.ajaxurl,
+			url: uwquickviewObj.ajaxurl,
 			type: 'GET',
 			dataType: 'json',
 			data: {
 				product_id: productId,
 				action: 'uwquickview_get_product_quickview',
-				nonce: wooquickviewObj.nonces.getQuickview,
+				nonce: uwquickviewObj.nonces.getQuickview,
 			}
 		}).done(function (r) {
 			popupProduct.innerHTML = r.data;
@@ -87,7 +87,7 @@
 			openQuickViewPopup();
 
 			var addToCartButton = popupProduct.querySelector('.single_add_to_cart_button');
-			if (addToCartButton) addToCartButton.classList.add('wooquickview-button');
+			if (addToCartButton) addToCartButton.classList.add('uwquickview-button');
 
 			var variationForms = popupProduct.querySelectorAll('.variations_form');
 
@@ -187,7 +187,7 @@
 		if (isError) return;
 		
 		payload.action = 'uwquickview_add_to_cart';
-		payload.nonce = wooquickviewObj.nonces.addToCart;
+		payload.nonce = uwquickviewObj.nonces.addToCart;
 		payload.product_id = productId;
 		payload.quantity = quantity;
 		payload.is_variation = isVariation;
@@ -199,7 +199,7 @@
 
 		$.ajax(
 			{
-				url: wooquickviewObj.ajaxurl,
+				url: uwquickviewObj.ajaxurl,
 				type: 'post',
 				dataType: 'json',
 				data: payload

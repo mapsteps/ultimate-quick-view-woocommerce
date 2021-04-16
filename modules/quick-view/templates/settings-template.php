@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 return function () {
 	?>
 
-	<div class="wrap heatbox-wrap wooquickview-settings-page">
+	<div class="wrap heatbox-wrap uwquickview-settings-page">
 
 		<div class="heatbox-header heatbox-margin-bottom">
 
@@ -40,16 +40,16 @@ return function () {
 
 			<h1 style="display: none;"></h1>
 
-			<form method="post" action="options.php" class="wooquickview-settings-form">
+			<form method="post" action="options.php" class="uwquickview-settings-form">
 
-				<?php settings_fields( 'wooquickview-settings-group' ); ?>
+				<?php settings_fields( 'uwquickview-settings-group' ); ?>
 
 				<div class="heatbox">
-					<?php do_settings_sections( 'wooquickview-general-settings' ); ?>
+					<?php do_settings_sections( 'uwquickview-general-settings' ); ?>
 				</div>
 
 				<div class="heatbox">
-					<?php do_settings_sections( 'wooquickview-misc-settings' ); ?>
+					<?php do_settings_sections( 'uwquickview-misc-settings' ); ?>
 				</div>
 
 				<?php submit_button( '', 'button button-primary button-larger' ); ?>
@@ -60,7 +60,7 @@ return function () {
 
 		</div>
 
-		<div class="heatbox-container heatbox-container-wide heatbox-container-center wooquickview-featured-products">
+		<div class="heatbox-container heatbox-container-wide heatbox-container-center uwquickview-featured-products">
 
 			<h2><?php _e( 'Check out our other free WordPress products!', 'ultimate-woo-quick-view' ); ?></h2>
 

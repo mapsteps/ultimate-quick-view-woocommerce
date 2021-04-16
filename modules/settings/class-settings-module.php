@@ -98,7 +98,7 @@ class Settings_Module extends Base_Module {
 		}
 
 		wp_enqueue_style( 'heatbox', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/heatbox.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
-		wp_enqueue_style( 'wooquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
 
 	}
 
@@ -111,7 +111,7 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_script( 'wooquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
 
 	}
 
@@ -121,17 +121,17 @@ class Settings_Module extends Base_Module {
 	public function add_settings() {
 
 		// Register setting.
-		register_setting( 'wooquickview-settings-group', 'uwquickview_settings' );
+		register_setting( 'uwquickview-settings-group', 'uwquickview_settings' );
 
 		// General section.
-		add_settings_section( 'wooquickview-general-section', __( 'General', 'ultimate-woo-quick-view' ), '', 'wooquickview-general-settings' );
-		add_settings_section( 'wooquickview-misc-section', __( 'Misc.', 'ultimate-woo-quick-view' ), '', 'wooquickview-misc-settings' );
+		add_settings_section( 'uwquickview-general-section', __( 'General', 'ultimate-woo-quick-view' ), '', 'uwquickview-general-settings' );
+		add_settings_section( 'uwquickview-misc-section', __( 'Misc.', 'ultimate-woo-quick-view' ), '', 'uwquickview-misc-settings' );
 
 		// General fields.
-		add_settings_field( 'some-setting', __( 'Some Setting', 'ultimate-woo-quick-view' ), array( $this, 'some_setting_field' ), 'wooquickview-general-settings', 'wooquickview-general-section' );
+		add_settings_field( 'some-setting', __( 'Some Setting', 'ultimate-woo-quick-view' ), array( $this, 'some_setting_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
 
 		// Misc fields.
-		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'wooquickview-misc-settings', 'wooquickview-misc-section' );
+		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-misc-settings', 'uwquickview-misc-section' );
 
 	}
 
