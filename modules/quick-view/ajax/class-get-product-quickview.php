@@ -2,10 +2,10 @@
 /**
  * Get product output for quick view.
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview\QuickView\Ajax;
+namespace Uwquickview\QuickView\Ajax;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -28,18 +28,18 @@ class Get_Product_Quickview {
 
 		$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : '';
 
-		if ( ! wp_verify_nonce( $nonce, 'wooquickview_get_product_quickview' ) ) {
-			wp_send_json_error( __( 'Invalid token', 'woocommerce-quick-view' ), 401 );
+		if ( ! wp_verify_nonce( $nonce, 'uwquickview_get_product_quickview' ) ) {
+			wp_send_json_error( __( 'Invalid token', 'ultimate-woo-quick-view' ), 401 );
 		}
 
 		if ( ! isset( $_GET['product_id'] ) || ! $_GET['product_id'] ) {
-			wp_send_json_error( __( 'Product id is required', 'woocommerce-quick-view' ), 401 );
+			wp_send_json_error( __( 'Product id is required', 'ultimate-woo-quick-view' ), 401 );
 		}
 
 		$this->product_id = absint( $_GET['product_id'] );
 
 		if ( ! get_post( $this->product_id ) ) {
-			wp_send_json_error( __( "Product doesn't exist", 'woocommerce-quick-view' ), 401 );
+			wp_send_json_error( __( "Product doesn't exist", 'ultimate-woo-quick-view' ), 401 );
 		}
 
 		$this->get_output();
@@ -65,10 +65,10 @@ class Get_Product_Quickview {
 
 			<div class="product">
 				<div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
-					<?php do_action( 'wooquickview_product_image' ); ?>
+					<?php do_action( 'uwquickview_product_image' ); ?>
 					<div class="summary entry-summary">
 						<div class="summary-content">
-							<?php do_action( 'wooquickview_product_summary' ); ?>
+							<?php do_action( 'uwquickview_product_summary' ); ?>
 						</div>
 					</div>
 				</div>

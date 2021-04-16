@@ -2,14 +2,14 @@
 /**
  * Quick view module output.
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview\QuickView;
+namespace Uwquickview\QuickView;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Wooquickview\Base\Base_Output;
+use Uwquickview\Base\Base_Output;
 
 /**
  * Class to setup dashboard output.
@@ -35,7 +35,7 @@ class Quick_View_Output extends Base_Output {
 	 */
 	public function __construct() {
 
-		$this->url = QUICK_VIEW_ULTIMATE_PLUGIN_URL . '/modules/feature';
+		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/feature';
 
 	}
 
@@ -87,8 +87,8 @@ class Quick_View_Output extends Base_Output {
 		$product_id = $product->get_id();
 		?>
 
-		<a href="javascript:void(0)" id="wooquickview_product_id_<?php echo absint( $product_id ); ?>" class="button wooquickview-button wooquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
-			<?php echo esc_attr( apply_filters( 'wooquickview_view_label', __( 'Quick View', 'woocommerce-quick-view' ) ) ); ?>
+		<a href="javascript:void(0)" id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button wooquickview-button wooquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
+			<?php echo esc_attr( apply_filters( 'uwquickview_view_label', __( 'Quick View', 'ultimate-woo-quick-view' ) ) ); ?>
 		</a>
 		<?php
 
@@ -153,25 +153,25 @@ class Quick_View_Output extends Base_Output {
 	public function build_quickview_content() {
 
 		// Product's image.
-		add_action( 'wooquickview_product_image', 'woocommerce_show_product_images' );
+		add_action( 'uwquickview_product_image', 'woocommerce_show_product_images' );
 
 		// Product's title.
-		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_title' );
+		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_title' );
 
 		// Product's rating.
-		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_rating' );
+		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_rating' );
 
 		// Product's price.
-		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_price' );
+		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_price' );
 
 		// Product's excerpt.
-		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_excerpt' );
+		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_excerpt' );
 
 		// Quantity & add to cart button.
-		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_add_to_cart' );
+		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_add_to_cart' );
 
 		// Product's meta.
-		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_meta' );
+		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_meta' );
 
 	}
 

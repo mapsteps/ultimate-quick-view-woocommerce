@@ -2,14 +2,14 @@
 /**
  * Base module output.
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview\Base;
+namespace Uwquickview\Base;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Wooquickview\Helpers\Array_Helper;
+use Uwquickview\Helpers\Array_Helper;
 
 /**
  * Class to setup base output.

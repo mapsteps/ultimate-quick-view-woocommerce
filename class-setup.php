@@ -2,10 +2,10 @@
 /**
  * Setup Woocommerce Quick View plugin.
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview;
+namespace Uwquickview;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -48,17 +48,20 @@ class Setup {
 	 */
 	public function load_modules() {
 
-		$modules['Wooquickview\\QuickView\\Quick_View_Module'] = __DIR__ . '/modules/quick-view/class-quick-view-module.php';
+		$modules = array();
 
-		$modules = apply_filters( 'wooquickview_modules', $modules );
+		$modules['Uwquickview\\QuickView\\Quick_View_Module'] = __DIR__ . '/modules/quick-view/class-quick-view-module.php';
+		$modules['Uwquickview\\Settings\\Settings_Module']    = __DIR__ . '/modules/settings/class-settings-module.php';
+
+		$modules = apply_filters( 'uwquickview_modules', $modules );
 
 		foreach ( $modules as $class => $file ) {
 			$splits      = explode( '/', $file );
 			$module_name = $splits[ count( $splits ) - 2 ];
 			$filter_name = str_ireplace( '-', '_', $module_name );
-			$filter_name = 'wooquickview_' . $filter_name;
+			$filter_name = 'uwquickview_' . $filter_name;
 
-			// We have a filter here wooquickview_$module_name to allow us to prevent loading modules under certain circumstances.
+			// We have a filter here uwquickview_$module_name to allow us to prevent loading modules under certain circumstances.
 			if ( apply_filters( $filter_name, true ) ) {
 
 				require_once $file;

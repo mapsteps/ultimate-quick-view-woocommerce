@@ -2,10 +2,10 @@
 /**
  * Array helper.
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview\Helpers;
+namespace Uwquickview\Helpers;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 

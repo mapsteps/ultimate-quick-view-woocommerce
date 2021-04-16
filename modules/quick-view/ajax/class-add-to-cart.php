@@ -2,10 +2,10 @@
 /**
  * Add to cart from quick view mode.
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview\QuickView\Ajax;
+namespace Uwquickview\QuickView\Ajax;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -52,18 +52,18 @@ class Add_To_Cart {
 
 		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
 
-		if ( ! wp_verify_nonce( $nonce, 'wooquickview_add_to_cart' ) ) {
-			wp_send_json_error( __( 'Invalid token', 'woocommerce-quick-view' ), 401 );
+		if ( ! wp_verify_nonce( $nonce, 'uwquickview_add_to_cart' ) ) {
+			wp_send_json_error( __( 'Invalid token', 'ultimate-woo-quick-view' ), 401 );
 		}
 
 		if ( ! isset( $_POST['product_id'] ) || ! $_POST['product_id'] ) {
-			wp_send_json_error( __( 'Product id is required', 'woocommerce-quick-view' ), 401 );
+			wp_send_json_error( __( 'Product id is required', 'ultimate-woo-quick-view' ), 401 );
 		}
 
 		$this->product_id = absint( $_POST['product_id'] );
 
 		if ( ! get_post( $this->product_id ) ) {
-			wp_send_json_error( __( "Product doesn't exist", 'woocommerce-quick-view' ), 401 );
+			wp_send_json_error( __( "Product doesn't exist", 'ultimate-woo-quick-view' ), 401 );
 		}
 
 		$this->quantity     = absint( $_POST['quantity'] );
@@ -83,7 +83,7 @@ class Add_To_Cart {
 		try {
 
 			$response = array(
-				'message'    => __( 'Product has been added to cart', 'woocommerce-quick-view' ),
+				'message'    => __( 'Product has been added to cart', 'ultimate-woo-quick-view' ),
 				'product_id' => $this->product_id,
 				'quantity'   => $this->quantity,
 			);
@@ -105,7 +105,7 @@ class Add_To_Cart {
 
 			wp_send_json_success( $response );
 		} catch ( \Exception $e ) {
-			wp_send_json_error( __( 'Something went wrong', 'woocommerce-quick-view' ), 500 );
+			wp_send_json_error( __( 'Something went wrong', 'ultimate-woo-quick-view' ), 500 );
 		}
 
 	}

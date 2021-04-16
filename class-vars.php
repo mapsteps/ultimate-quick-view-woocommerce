@@ -2,10 +2,10 @@
 /**
  * Setter & getter utility
  *
- * @package Woocommerce_Quick_View
+ * @package Ultimate_Woo_Quick_View
  */
 
-namespace Wooquickview;
+namespace Uwquickview;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 

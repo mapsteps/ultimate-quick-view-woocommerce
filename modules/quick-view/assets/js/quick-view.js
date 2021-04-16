@@ -78,7 +78,7 @@
 			dataType: 'json',
 			data: {
 				product_id: productId,
-				action: 'wooquickview_get_product_quickview',
+				action: 'uwquickview_get_product_quickview',
 				nonce: wooquickviewObj.nonces.getQuickview,
 			}
 		}).done(function (r) {
@@ -186,7 +186,7 @@
 		// Stop if there is any error.
 		if (isError) return;
 		
-		payload.action = 'wooquickview_add_to_cart';
+		payload.action = 'uwquickview_add_to_cart';
 		payload.nonce = wooquickviewObj.nonces.addToCart;
 		payload.product_id = productId;
 		payload.quantity = quantity;
