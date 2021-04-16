@@ -50,20 +50,20 @@ class Add_To_Cart {
 	 */
 	public function ajax() {
 
-		$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : '';
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'wooquickview_add_to_cart' ) ) {
-			wp_send_json_error( __( 'Invalid token', 'woocommerce-quick-view' ) );
+			wp_send_json_error( __( 'Invalid token', 'woocommerce-quick-view' ), 401 );
 		}
 
 		if ( ! isset( $_POST['product_id'] ) || ! $_POST['product_id'] ) {
-			wp_send_json_error( __( 'Product id is required', 'woocommerce-quick-view' ) );
+			wp_send_json_error( __( 'Product id is required', 'woocommerce-quick-view' ), 401 );
 		}
 
 		$this->product_id = absint( $_POST['product_id'] );
 
 		if ( ! get_post( $this->product_id ) ) {
-			wp_send_json_error( __( "Product doesn't exist", 'woocommerce-quick-view' ) );
+			wp_send_json_error( __( "Product doesn't exist", 'woocommerce-quick-view' ), 401 );
 		}
 
 		$this->quantity     = absint( $_POST['quantity'] );
@@ -105,7 +105,7 @@ class Add_To_Cart {
 
 			wp_send_json_success( $response );
 		} catch ( \Exception $e ) {
-			wp_send_json_error( __( 'Something went wrong', 'woocommerce-quick-view' ) );
+			wp_send_json_error( __( 'Something went wrong', 'woocommerce-quick-view' ), 500 );
 		}
 
 	}

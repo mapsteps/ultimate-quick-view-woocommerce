@@ -153,7 +153,7 @@ class Quick_View_Output extends Base_Output {
 	public function build_quickview_content() {
 
 		// Product's image.
-		add_action( 'wooquickview_view_product_image', 'woocommerce_show_product_images' );
+		add_action( 'wooquickview_product_image', 'woocommerce_show_product_images' );
 
 		// Product's title.
 		add_action( 'wooquickview_product_summary', 'woocommerce_template_single_title' );

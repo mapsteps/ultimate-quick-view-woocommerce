@@ -1,3 +1,21 @@
+@-webkit-keyframes loadingSpinAround {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+@keyframes loadingSpinAround {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
 .xwooquickview-view-button {
 	position: absolute;
 	bottom: 10px;
@@ -22,25 +40,59 @@
 	opacity: 1;
 }
 
+.product .wooquickview-button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.product .wooquickview-button.is-loading {
+	justify-content: center;
+	color: transparent !important;
+	pointer-events: none;
+}
+
+.product .wooquickview-button.is-loading::after {
+	content: "";
+	position: absolute;
+	width: 1em;
+	display: block;
+	height: 1em;
+	/* border: 2px solid #dbdbdb; */
+	border: 2px solid #814676;
+	/* border-color: transparent transparent #fff #fff !important; */
+	border-color: transparent transparent #9B5C8F #9B5C8F !important;
+	border-radius: 290486px;
+	-webkit-animation: loadingSpinAround 0.5s infinite linear;
+	animation: loadingSpinAround 0.5s infinite linear;
+}
+
 .wooquickview-popup {
 	display: none;
+	align-items: center;
+	justify-content: center;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
+	opacity: 0;
 	z-index: 999;
 }
 
 .wooquickview-close-popup {
 	position: absolute;
 	display: inline-block;
-	right: 0;
-	top: 0;
-	width: 60px;
-	height: 60px;
-	line-height: 60px;
+	right: 21px;
+	top: 53px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
 	text-align: center;
 	cursor: pointer;
 	overflow: hidden;
@@ -54,11 +106,11 @@
 	position: absolute;
 	top: 50%;
 	left: 0;
-	margin-top: -4px;
+	margin-top: -1px;
 	width: 100%;
-	height: 8px;
+	height: 2px;
 	background: #fff;
-	border-radius: 5px;
+	border-radius: 1px;
 }
 
 .wooquickview-close-popup::before {

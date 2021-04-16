@@ -9,9 +9,14 @@
 	var popupProduct = document.querySelector('#wooquickview-popup-product');
 	if (!popup || !popupProduct) return;
 
+	var $popup = $(popup);
+
 	var state = {
 		isRequesting: false
 	};
+
+	var loading = {}
+	var speed = 300;
 
 	/**
 	 * Init the plugin.
@@ -30,27 +35,28 @@
 		$(document).on('click', '.wooquickview-close-popup', closeQuickViewPopup);
 
 		// Close popup by clicking on the overlay.
-		$(document).click(function (e) {
-			var $target = $(e.target);
-
-			if (
-				!$target.closest('.wooquickview-popup-content').length &&
-				$('.wooquickview-popup-content').is(":visible")) {
+		document.addEventListener('click', function (e) {
+			if (e.target.classList.contains('wooquickview-popup') && $popup.is(":visible")) {
 				closeQuickViewPopup();
 			}
 		});
 
 		// Close popup by tapping the escape key.
-		$(document).keyup(function (e) {
-			if (e.keyCode == 27) {
-				if ($('.wooquickview-popup-content').is(':visible')) {
-					closeQuickViewPopup();
-				}
-			}
+		document.addEventListener('keyup', function (e) {
+			if (e.key !== 'Escape' && e.key !== 'Esc' && e.keyCode !== 27) return;
+			if ($popup.is(':visible')) closeQuickViewPopup();
 		});
 
-		$(document).on('click', '.wooquickview-popup-content .product:not(.product-type-external) .single_add_to_cart_button', addToCart)
+		$(document).on('click', '.wooquickview-popup-content .product:not(.product-type-external) .single_add_to_cart_button', addToCart);
 	}
+
+	loading.start = function (button) {
+		button.classList.add('is-loading');
+	};
+
+	loading.stop = function (button) {
+		button.classList.remove('is-loading');
+	};
 
 	/**
 	 * Load quick view output through ajax request.
@@ -62,15 +68,9 @@
 		state.isRequesting = true;
 
 		var productId = this.dataset.productId;
+		var button = this;
 
-		$(this).block({
-			message: null,
-			overlayCSS: {
-				background: '#fff url(' + wooquickviewObj.loader + ') no-repeat center',
-				opacity: 0.5,
-				cursor: 'none'
-			}
-		});
+		loading.start(this);
 
 		$.ajax({
 			url: wooquickviewObj.ajaxurl,
@@ -82,18 +82,9 @@
 				nonce: wooquickviewObj.nonces.getQuickview,
 			}
 		}).done(function (r) {
-			if (!r) {
-				console.error('Invalid request');
-				return;
-			}
-
-			if (!r.success) {
-				console.error(r.data);
-				return;
-			}
-
 			popupProduct.innerHTML = r.data;
-			$(popup).stop().fadeIn(300);
+
+			openQuickViewPopup();
 
 			// Variation Form
 			var variationForms = popupProduct.querySelectorAll('.variations_form');
@@ -104,7 +95,6 @@
 				$(form).trigger('reset_image');
 			});
 
-
 			if ('undefined' !== typeof $.fn.wc_product_gallery) {
 				var productGalleries = popupProduct.querySelectorAll('.woocommerce-product-gallery');
 
@@ -112,17 +102,27 @@
 					$(productGallery).wc_product_gallery();
 				});
 			}
-		}).fail(function () {
-			console.error('There is a problem with network/ server.');
+		}).fail(function (jqXHR) {
+			console.error(buildErrorMsg(jqXHR));
 		}).always(function () {
-			$(this).unblock();
+			loading.stop(button);
 			state.isRequesting = false;
 		});
 	}
 
+	function openQuickViewPopup() {
+		$popup.css({ display: 'flex' }).stop().animate({
+			opacity: 1
+		}, speed);
+	}
+
 	function closeQuickViewPopup() {
-		$(popup).stop().fadeOut('300');
-		popupProduct.innerHTML = '';
+		$popup.stop().animate({
+			opacity: 0
+		}, speed, function () {
+			popupProduct.innerHTML = '';
+			popup.style.display = 'none';
+		});
 	}
 
 	/**
@@ -135,15 +135,9 @@
 		if (state.isRequesting) return;
 		state.isRequesting = true;
 
-		// Add loading / spinner when the add to cart is triggered.
-		$(this).block({
-			message: null,
-			overlayCSS: {
-				background: '#fff url(' + wooquickviewObj.loader + ') no-repeat center',
-				opacity: 0.5,
-				cursor: 'none'
-			}
-		});
+		var button = this;
+
+		loading.start(this);
 
 		var variationForm = $(this).parents('.variations_form');
 		var variationBag = {};
@@ -209,26 +203,22 @@
 				data: payload
 			}
 		).done(function (r) {
-			if (!r) {
-				console.error('Invalid request');
-				return;
-			}
-
-			if (!r.success) {
-				console.error(r.data);
-				return;
-			}
-
 			$(document.body).trigger('wc_fragment_refresh');
 			$(document.body).trigger('added_to_cart');
-		}).fail(function () {
-			console.error('There is a problem with network/ server.');
+		}).fail(function (jqXHR) {
+			console.error(buildErrorMsg(jqXHR));
 		}).always(function () {
-			// Remove loader / spinner from add to cart button.
-			$(this).unblock();
+			loading.stop(button);
 			closeQuickViewPopup();
 			state.isRequesting = false;
 		});
+	}
+
+	function buildErrorMsg(jqXHR) {
+		var msg = 'Error ' + jqXHR.status.toString() + ' (' + jqXHR.statusText + ')';
+		msg = jqXHR.responseJSON.data ? msg + ': ' + jqXHR.responseJSON.data : msg;
+
+		return msg;
 	}
 
 	init();

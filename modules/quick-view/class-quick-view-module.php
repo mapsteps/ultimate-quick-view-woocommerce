@@ -122,8 +122,8 @@ class Quick_View_Module extends Base_Module {
 		add_action( 'wp_ajax_wooquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
 		add_action( 'wp_ajax_nopriv_wooquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
 
-		add_action( 'wp_ajax_add_to_cart', array( $add_to_cart, 'ajax' ) );
-		add_action( 'wp_ajax_nopriv_add_to_cart', array( $add_to_cart, 'ajax' ) );
+		add_action( 'wp_ajax_wooquickview_add_to_cart', array( $add_to_cart, 'ajax' ) );
+		add_action( 'wp_ajax_nopriv_wooquickview_add_to_cart', array( $add_to_cart, 'ajax' ) );
 
 	}
 
