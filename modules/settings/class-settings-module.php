@@ -122,12 +122,12 @@ class Settings_Module extends Base_Module {
 	 */
 	public function add_settings() {
 
-		// Register setting.
+		// Register settings.
 		register_setting( 'uwquickview-settings-group', 'uwquickview_settings' );
 
-		// General section.
+		// Register sections.
 		add_settings_section( 'uwquickview-general-section', __( 'General Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-general-settings' );
-		add_settings_section( 'uwquickview-button-section', __( 'Button Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-button-settings' );
+		add_settings_section( 'uwquickview-button-section', __( 'Quick View Button Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-button-settings' );
 		add_settings_section( 'uwquickview-popup-section', __( 'Popup Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-popup-settings' );
 		add_settings_section( 'uwquickview-custom-section', __( 'Custom Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-custom-settings' );
 
@@ -137,6 +137,7 @@ class Settings_Module extends Base_Module {
 		add_settings_field( 'remove-all-settings', __( 'Remove Settings on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
 
 		// Button fields.
+		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-woo-quick-view' ), array( $this, 'button_position_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
 	}
 
 	/**
@@ -165,6 +166,16 @@ class Settings_Module extends Base_Module {
 	public function remove_on_uninstall_field() {
 
 		$field = require __DIR__ . '/templates/fields/remove-on-uninstall.php';
+		$field();
+
+	}
+
+	/**
+	 * Button position field.
+	 */
+	public function button_position_field() {
+
+		$field = require __DIR__ . '/templates/fields/button-position.php';
 		$field();
 
 	}

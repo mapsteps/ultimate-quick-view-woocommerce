@@ -6,6 +6,18 @@ var HeatboxTab = (function ($) {
 
 	function onTabNavClick(e) {
 		var hash = this.href.substring(this.href.indexOf('#') + 1);
+		var tabLink = this;
+
+		var tabMenuItems = this.parentNode.parentNode.querySelectorAll('.heatbox-tab--nav-item');
+
+		tabMenuItems.forEach(function (tabMenuItem) {
+			if (tabMenuItem === tabLink.parentNode) {
+				tabMenuItem.classList.add('is-active');
+			} else {
+				tabMenuItem.classList.remove('is-active');
+			}
+		});
+
 		var matchedTabContent = document.querySelector('.heatbox-tab--content [data-tab-id="' + hash + '"]');
 
 		if (!matchedTabContent) return;

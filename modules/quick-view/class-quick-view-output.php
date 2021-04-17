@@ -67,8 +67,24 @@ class Quick_View_Output extends Base_Output {
 	 */
 	public function setup() {
 
+		$settings = get_option( 'uwquickview_settings', array() );
+
+		$hook_name     = 'woocommerce_before_shop_loop_item_title';
+		$hook_priority = 20;
+
+		if ( isset( $settings['button_position'] ) ) {
+			$button_position = $settings['button_position'];
+			$exploded_values = explode( '_', $button_position );
+			$last_partial    = end( $exploded_values );
+
+			if ( is_numeric( $last_partial ) ) {
+				$hook_name     = str_ireplace( '_' . $last_partial, '', $button_position );
+				$hook_priority = absint( $last_partial );
+			}
+		}
+
 		// Add quick view button.
-		add_action( 'woocommerce_before_shop_loop_item_title', array( self::get_instance(), 'add_quick_view_button' ), 15 );
+		add_action( $hook_name, array( self::get_instance(), 'add_quick_view_button' ), $hook_priority );
 
 		// Add empty div to the footer to populate div with response from ajax request.
 		add_action( 'wp_footer', array( self::get_instance(), 'popup_output' ) );
