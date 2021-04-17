@@ -138,6 +138,7 @@ class Settings_Module extends Base_Module {
 
 		// Button fields.
 		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-woo-quick-view' ), array( $this, 'button_position_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
+		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-woo-quick-view' ), array( $this, 'button_text_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
 	}
 
 	/**
@@ -176,6 +177,16 @@ class Settings_Module extends Base_Module {
 	public function button_position_field() {
 
 		$field = require __DIR__ . '/templates/fields/button-position.php';
+		$field();
+
+	}
+
+	/**
+	 * Button text field.
+	 */
+	public function button_text_field() {
+
+		$field = require __DIR__ . '/templates/fields/button-text.php';
 		$field();
 
 	}

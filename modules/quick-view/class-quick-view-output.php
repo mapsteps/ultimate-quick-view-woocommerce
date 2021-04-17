@@ -95,6 +95,8 @@ class Quick_View_Output extends Base_Output {
 
 	/**
 	 * Add quick view button to products.
+	 *
+	 * @param int $product_id The product id.
 	 */
 	public function add_quick_view_button( $product_id = 0 ) {
 
@@ -103,9 +105,15 @@ class Quick_View_Output extends Base_Output {
 		$product_id = $product->get_id();
 		?>
 
-		<!-- Start of quick view button -->
+		<!-- Start quick view button -->
 		<button id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uwquickview-button uwquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
-			<?php echo esc_attr( apply_filters( 'uwquickview_view_label', __( 'Quick View', 'ultimate-woo-quick-view' ) ) ); ?>
+			<?php
+			$settings    = get_option( 'uwquickview_settings' );
+			$default     = __( 'Quick View', 'ultimate-woo-quick-view' );
+			$button_text = isset( $settings['button_text'] ) && ! empty( $settings['button_text'] ) ? $settings['button_text'] : $default;
+
+			echo esc_attr( apply_filters( 'uwquickview_button_text', $button_text ) );
+			?>
 		</button>
 		<!-- End of quick view button -->
 
