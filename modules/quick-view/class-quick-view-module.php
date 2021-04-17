@@ -57,6 +57,13 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function setup() {
 
+		$settings    = get_option( 'uwquickview_settings' );
+		$is_disabled = isset( $settings['disable'] ) ? true : false;
+
+		if ( $is_disabled ) {
+			return;
+		}
+
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_styles' ), 20 );
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_scripts' ) );
 
