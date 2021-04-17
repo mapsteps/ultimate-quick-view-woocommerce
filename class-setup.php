@@ -41,7 +41,7 @@ class Setup {
 
 		$this->load_modules();
 
-		register_deactivation_hook( plugin_basename( __FILE__ ), array( $this, 'deactivation' ), 20 );
+		register_deactivation_hook( plugin_basename( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'deactivation' ), 20 );
 
 	}
 
@@ -92,6 +92,24 @@ class Setup {
 				$module->setup();
 
 			}
+		}
+
+	}
+
+	/**
+	 * Plugin deactivation.
+	 */
+	public function deactivation() {
+
+		$settings = get_option( 'uwquickview_settings' );
+
+		$remove_on_uninstall = isset( $settings['remove_on_uninstall'] ) ? true : false;
+		$remove_on_uninstall = apply_filters( 'uwquickview_clean_uninstall', $remove_on_uninstall );
+
+		if ( $remove_on_uninstall ) {
+
+			delete_option( 'uwquickview_settings' );
+
 		}
 
 	}

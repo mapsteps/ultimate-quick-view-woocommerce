@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 // Plugin constants.
 define( 'ULTIMATE_WOO_QUICK_VIEW_PLUGIN_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
+define( 'ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE', rtrim( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_DIR . '/ultimate-woo-quick-view.php' ) );
 define( 'ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 define( 'ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION', '1.0' );
 
