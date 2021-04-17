@@ -103,9 +103,12 @@ class Quick_View_Output extends Base_Output {
 		$product_id = $product->get_id();
 		?>
 
-		<a href="javascript:void(0)" id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uwquickview-button uwquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
+		<!-- Start of quick view button -->
+		<button id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uwquickview-button uwquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
 			<?php echo esc_attr( apply_filters( 'uwquickview_view_label', __( 'Quick View', 'ultimate-woo-quick-view' ) ) ); ?>
-		</a>
+		</button>
+		<!-- End of quick view button -->
+
 		<?php
 
 	}
