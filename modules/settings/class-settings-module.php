@@ -111,7 +111,9 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_script( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'mapsteps-polyfills', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/polyfills.js', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery', 'mapsteps-polyfills' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uwquickview-settings', $this->url . '/assets/js/settings.js', array( 'uwquickview-admin' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
 
 	}
 
@@ -124,23 +126,35 @@ class Settings_Module extends Base_Module {
 		register_setting( 'uwquickview-settings-group', 'uwquickview_settings' );
 
 		// General section.
-		add_settings_section( 'uwquickview-general-section', __( 'General', 'ultimate-woo-quick-view' ), '', 'uwquickview-general-settings' );
-		add_settings_section( 'uwquickview-misc-section', __( 'Misc.', 'ultimate-woo-quick-view' ), '', 'uwquickview-misc-settings' );
+		add_settings_section( 'uwquickview-general-section', __( 'General Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-general-settings' );
+		add_settings_section( 'uwquickview-button-section', __( 'Button Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-button-settings' );
+		add_settings_section( 'uwquickview-popup-section', __( 'Popup Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-popup-settings' );
+		add_settings_section( 'uwquickview-custom-section', __( 'Custom Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-custom-settings' );
 
 		// General fields.
-		add_settings_field( 'some-setting', __( 'Some Setting', 'ultimate-woo-quick-view' ), array( $this, 'some_setting_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
+		add_settings_field( 'disable', __( 'Disable Quick View', 'ultimate-woo-quick-view' ), array( $this, 'disable_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
+		add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'ultimate-woo-quick-view' ), array( $this, 'disable_on_mobile_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
+		add_settings_field( 'remove-all-settings', __( 'Remove Settings on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
 
-		// Misc fields.
-		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-misc-settings', 'uwquickview-misc-section' );
+		// Button fields.
+	}
+
+	/**
+	 * Some setting field.
+	 */
+	public function disable_field() {
+
+		$field = require __DIR__ . '/templates/fields/disable.php';
+		$field();
 
 	}
 
 	/**
 	 * Some setting field.
 	 */
-	public function some_setting_field() {
+	public function disable_on_mobile_field() {
 
-		$field = require __DIR__ . '/templates/fields/some-setting.php';
+		$field = require __DIR__ . '/templates/fields/disable-on-mobile.php';
 		$field();
 
 	}

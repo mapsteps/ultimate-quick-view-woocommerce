@@ -35,22 +35,22 @@ return function () {
 				<nav class="heatbox-tab--nav">
 					<ul>
 						<li class="heatbox-tab--nav-item is-active">
-							<a href="#general-settings">
+							<a href="#general">
 								<?php _e( 'General Settings', 'ultimate-woo-quick-view' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab--nav-item">
-							<a href="#button-settings">
+							<a href="#button">
 								<?php _e( 'Button Settings', 'ultimate-woo-quick-view' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab--nav-item">
-							<a href="#popup-settings">
+							<a href="#popup">
 								<?php _e( 'Popup Settings', 'ultimate-woo-quick-view' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab--nav-item">
-							<a href="#custom-css">
+							<a href="#custom">
 								<?php _e( 'Custom CSS', 'ultimate-woo-quick-view' ); ?>
 							</a>
 						</li>
@@ -69,12 +69,30 @@ return function () {
 
 				<?php settings_fields( 'uwquickview-settings-group' ); ?>
 
-				<div class="heatbox">
-					<?php do_settings_sections( 'uwquickview-general-settings' ); ?>
-				</div>
+				<div class="heatbox-tab--content">
+					<div class="heatbox-tab--content-item is-active" data-tab-id="general">
+						<div class="heatbox">
+							<?php do_settings_sections( 'uwquickview-general-settings' ); ?>
+						</div>
+					</div>
 
-				<div class="heatbox">
-					<?php do_settings_sections( 'uwquickview-misc-settings' ); ?>
+					<div class="heatbox-tab--content-item" data-tab-id="button">
+						<div class="heatbox">
+							<?php do_settings_sections( 'uwquickview-button-settings' ); ?>
+						</div>
+					</div>
+
+					<div class="heatbox-tab--content-item" data-tab-id="popup">
+						<div class="heatbox">
+							<?php do_settings_sections( 'uwquickview-popup-settings' ); ?>
+						</div>
+					</div>
+
+					<div class="heatbox-tab--content-item" data-tab-id="custom">
+						<div class="heatbox">
+							<?php do_settings_sections( 'uwquickview-custom-settings' ); ?>
+						</div>
+					</div>
 				</div>
 
 				<?php submit_button( '', 'button button-primary button-larger' ); ?>

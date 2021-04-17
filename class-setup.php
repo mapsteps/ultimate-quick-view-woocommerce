@@ -18,9 +18,9 @@ class Setup {
 	 */
 	public static function init() {
 
-		$instance = new Setup();
+		$class = new Setup();
 
-		add_action( 'plugins_loaded', array( $instance, 'setup' ) );
+		add_action( 'plugins_loaded', array( $class, 'setup' ) );
 
 	}
 
@@ -37,9 +37,32 @@ class Setup {
 
 		}
 
+		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
+
 		$this->load_modules();
 
 		register_deactivation_hook( plugin_basename( __FILE__ ), array( $this, 'deactivation' ), 20 );
+
+	}
+
+	/**
+	 * Admin body class.
+	 */
+	public function admin_body_class( $classes ) {
+
+		$screens = array(
+			'woocommerce_page_uwquickview_settings',
+		);
+
+		$screen = get_current_screen();
+
+		if ( ! in_array( $screen->id, $screens, true ) ) {
+			return $classes;
+		}
+
+		$classes .= ' heatbox-admin has-header';
+
+		return $classes;
 
 	}
 
