@@ -14,7 +14,7 @@ return function () {
 	$value    = isset( $settings['button_text'] ) ? $settings['button_text'] : $default;
 	?>
 
-	<input type="text" name="uwquickview_settings[button_text]" class="all-options" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php echo esc_attr( $default ); ?>" />
+	<input type="text" name="uwquickview_settings[button_text]" class="regular-text" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php echo esc_attr( $default ); ?>" />
 
 	<?php
 

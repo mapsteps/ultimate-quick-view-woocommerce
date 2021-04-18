@@ -1,4 +1,6 @@
 var HeatboxTab = (function ($) {
+	var refererField = document.querySelector('[name="_wp_http_referer"]');
+
 	function init() {
 		$(document).on('click', '.heatbox-tab--nav-item a', onTabNavClick);
 		window.addEventListener('load', checkTabState);
@@ -6,6 +8,10 @@ var HeatboxTab = (function ($) {
 
 	function onTabNavClick(e) {
 		var hash = this.href.substring(this.href.indexOf('#') + 1);
+		if (!hash) return;
+
+		setRefererValue(hash);
+	
 		var tabLink = this;
 
 		var tabMenuItems = this.parentNode.parentNode.querySelectorAll('.heatbox-tab--nav-item');
@@ -35,6 +41,10 @@ var HeatboxTab = (function ($) {
 
 	function checkTabState() {
 		var hash = window.location.hash.substr(1);
+		if (!hash) return;
+
+		setRefererValue(hash);
+
 		var matchedTabLink = document.querySelector('.heatbox-tab--nav-item a[href="#' + hash + '"]');
 		var matchedTabContent = document.querySelector('.heatbox-tab--content [data-tab-id="' + hash + '"]');
 
@@ -64,6 +74,20 @@ var HeatboxTab = (function ($) {
 					tabContent.classList.remove('is-active');
 				}
 			});
+		}
+	}
+
+	function setRefererValue(hash) {
+		if (!refererField) return;
+		var url;
+
+		if (refererField.value.includes('#')) {
+			url = refererField.value.split('#');
+			url = url[0];
+
+			refererField.value = url + '#' + hash;
+		} else {
+			refererField.value = refererField.value + '#' + hash;
 		}
 	}
 

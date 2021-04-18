@@ -97,6 +97,7 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
+		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'heatbox', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/heatbox.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
 		wp_enqueue_style( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
 
@@ -111,8 +112,15 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
+		wp_register_script( 'wp-color-picker-alpha', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '3.0.0', true );
+		wp_add_inline_script(
+			'wp-color-picker-alpha',
+			'jQuery( function() { jQuery( ".color-picker" ).wpColorPicker(); } );'
+		);
+		wp_enqueue_script( 'wp-color-picker-alpha' );
+
 		wp_enqueue_script( 'mapsteps-polyfills', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/polyfills.js', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
-		wp_enqueue_script( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery', 'mapsteps-polyfills' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker-alpha', 'mapsteps-polyfills' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
 		wp_enqueue_script( 'uwquickview-settings', $this->url . '/assets/js/settings.js', array( 'uwquickview-admin' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
 
 	}
@@ -139,6 +147,7 @@ class Settings_Module extends Base_Module {
 		// Button fields.
 		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-woo-quick-view' ), array( $this, 'button_position_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
 		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-woo-quick-view' ), array( $this, 'button_text_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
+		add_settings_field( 'button-color-type', __( 'Button Color', 'ultimate-woo-quick-view' ), array( $this, 'button_color_type_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
 	}
 
 	/**
@@ -187,6 +196,16 @@ class Settings_Module extends Base_Module {
 	public function button_text_field() {
 
 		$field = require __DIR__ . '/templates/fields/button-text.php';
+		$field();
+
+	}
+
+	/**
+	 * Button color type field.
+	 */
+	public function button_color_type_field() {
+
+		$field = require __DIR__ . '/templates/fields/button-color-type.php';
 		$field();
 
 	}

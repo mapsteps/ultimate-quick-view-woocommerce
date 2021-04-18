@@ -18,7 +18,7 @@ return function () {
 	);
 	?>
 
-	<select name="uwquickview_settings[button_position]" id="uwquickview_settings-button_position" class="all-options">
+	<select name="uwquickview_settings[button_position]" id="uwquickview_settings-button_position" class="regular-text">
 		<?php foreach ( $options as $option_value => $option_text ) : ?>
 			<option value="<?php echo esc_html( $option_value ); ?>" <?php selected( $value, $option_value ); ?>>
 				<?php echo esc_html( $option_text ); ?>
