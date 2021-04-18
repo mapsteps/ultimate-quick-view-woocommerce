@@ -37,6 +37,7 @@ class Setup {
 
 		}
 
+		add_filter( 'plugin_action_links_' . plugin_basename( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		$this->load_modules();
@@ -46,7 +47,24 @@ class Setup {
 	}
 
 	/**
+	 * Add action links displayed in plugins page.
+	 *
+	 * @param array $links The action links array.
+	 * @return array The modified action links array.
+	 */
+	public function plugin_action_links( $links ) {
+
+		$settings = array( '<a href="' . admin_url( 'admin.php?page=uwquickview_settings' ) . '">' . __( 'Settings', 'ultimate-woo-quick-view' ) . '</a>' );
+
+		return array_merge( $settings, $links );
+
+	}
+
+	/**
 	 * Admin body class.
+	 *
+	 * @param string $classes The existing body classes.
+	 * @return string The body classes.
 	 */
 	public function admin_body_class( $classes ) {
 
