@@ -103,3 +103,54 @@
 	text-align: center;
 	opacity: .5;
 }
+
+/* Fields */
+.uwquickview-fields {
+	position: relative;
+}
+
+.uwquickview-field {
+	margin-bottom: 15px;
+}
+
+.uwquickview-inline-fields .uwquickview-field:last-child {
+	margin-bottom: 0;
+}
+
+.uwquickview-inline-fields {
+	display: flex;
+	position: relative;
+}
+
+.uwquickview-inline-fields .uwquickview-field {
+	margin-right: 10px;
+}
+
+.uwquickview-inline-fields .uwquickview-field:last-child {
+	margin-right: 0;
+}
+
+.uwquickview-field .wp-picker-input-wrap .color-picker {
+	width: 160px !important;
+}
+
+.uwquickview-field .wp-picker-input-wrap {
+	display: inline-flex;
+	max-width: 220px;
+	overflow: hidden;
+	transition: max-width .2s;
+}
+
+.uwquickview-field .wp-picker-input-wrap.hidden {
+	display: inline-flex;
+	max-width: 0;
+}
+
+.uwquickview-label {
+	display: block;
+	margin-bottom: 3px;
+}
+
+.is-hidden {
+	display: none;
+}

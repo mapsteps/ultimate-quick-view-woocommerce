@@ -9,6 +9,8 @@ namespace Uwquickview;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
+use Uwquickview\Vars;
+
 /**
  * Class to setup Woocommerce Quick View plugin.
  */
@@ -37,12 +39,36 @@ class Setup {
 
 		}
 
+		$this->set_data();
+
 		add_filter( 'plugin_action_links_' . plugin_basename( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		$this->load_modules();
 
 		register_deactivation_hook( plugin_basename( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'deactivation' ), 20 );
+
+	}
+
+	/**
+	 * Provide data for the plugin.
+	 * This is optimal strategy to only get_option once across modules.
+	 */
+	public function set_data() {
+
+		$defaults = array(
+			'button_color_type'        => 'default',
+			'button_text_color'        => '#ffffff',
+			'button_text_accent_color' => '#ffffff',
+			'button_bg_color'          => '#9B5C8F',
+			'button_bg_accent_color'   => '#9b1482',
+		);
+		$settings = get_option( 'uwquickview_settings', array() );
+		$values   = wp_parse_args( $settings, $defaults );
+
+		Vars::set( 'default_settings', $defaults );
+		Vars::set( 'settings', $settings );
+		Vars::set( 'values', $values );
 
 	}
 

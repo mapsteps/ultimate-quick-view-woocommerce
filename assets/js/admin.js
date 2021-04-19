@@ -97,3 +97,34 @@ var HeatboxTab = (function ($) {
 })(jQuery);
 
 HeatboxTab.init();
+
+HeatboxShowIf = (function ($) {
+	function init() {
+		var els = document.querySelectorAll('[data-show-if-field]');
+		if (!els) return;
+	
+		els.forEach(function (el) {
+			var field = document.querySelector('#' + el.dataset.showIfField);
+			var value = el.dataset.showIfValue;
+	
+			checkValueState();
+	
+			field.addEventListener('change', checkValueState);
+			
+			function checkValueState() {
+				if (field.value === value) {
+					el.classList.remove('is-hidden');
+				} else {
+					el.classList.add('is-hidden');
+				}
+			}
+		});
+	}
+
+	return {
+		init: init
+	};
+
+})(jQuery);
+
+HeatboxShowIf.init();

@@ -35,6 +35,8 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function __construct() {
 
+		parent::__construct();
+
 		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/quick-view';
 
 	}

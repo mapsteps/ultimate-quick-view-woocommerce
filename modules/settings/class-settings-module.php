@@ -9,6 +9,7 @@ namespace Uwquickview\Settings;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
+use Uwquickview\Vars;
 use Uwquickview\Base\Base_Module;
 
 /**
@@ -34,6 +35,8 @@ class Settings_Module extends Base_Module {
 	 * Module constructor.
 	 */
 	public function __construct() {
+
+		parent::__construct();
 
 		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/settings';
 
@@ -206,7 +209,7 @@ class Settings_Module extends Base_Module {
 	public function button_color_type_field() {
 
 		$field = require __DIR__ . '/templates/fields/button-color-type.php';
-		$field();
+		$field( $this );
 
 	}
 
