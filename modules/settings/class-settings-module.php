@@ -159,7 +159,7 @@ class Settings_Module extends Base_Module {
 	public function disable_field() {
 
 		$field = require __DIR__ . '/templates/fields/disable.php';
-		$field();
+		$field( $this );
 
 	}
 
@@ -169,7 +169,7 @@ class Settings_Module extends Base_Module {
 	public function disable_on_mobile_field() {
 
 		$field = require __DIR__ . '/templates/fields/disable-on-mobile.php';
-		$field();
+		$field( $this );
 
 	}
 

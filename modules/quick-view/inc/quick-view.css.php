@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module_output ) {
 
-	$values = $module_output->values;
+	$settings = $module_output->settings;
+	$values   = $module_output->values;
 	?>
 
 	.product a.uwquickview-button,
@@ -36,6 +37,15 @@ return function ( $module_output ) {
 
 		<?php if ( $values['button_bg_accent_color'] ) : ?>
 			background-color: <?php echo esc_attr( $values['button_bg_accent_color'] ); ?>;
+		<?php endif; ?>
+	}
+
+	@media screen and (max-width: 767px) {
+		<?php if ( isset( $settings['disable_on_mobile'] ) ) : ?>
+			.product a.uwquickview-button,
+			.product button.uwquickview-button {
+				display: none;
+			}
 		<?php endif; ?>
 	}
 

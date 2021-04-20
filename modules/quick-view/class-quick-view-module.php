@@ -59,8 +59,7 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function setup() {
 
-		$settings    = get_option( 'uwquickview_settings' );
-		$is_disabled = isset( $settings['disable'] ) ? true : false;
+		$is_disabled = isset( $this->settings['disable'] ) ? true : false;
 
 		if ( $is_disabled ) {
 			return;

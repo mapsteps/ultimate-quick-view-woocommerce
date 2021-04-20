@@ -7,10 +7,14 @@
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-return function () {
+/**
+ * Outputting disable quick view field.
+ *
+ * @param Settings_Module $module The Settings_Module instance.
+ */
+return function ( $module ) {
 
-	$settings   = get_option( 'uwquickview_settings' );
-	$is_checked = isset( $settings['disable'] ) ? 1 : 0;
+	$is_checked = isset( $module->settings['disable'] ) ? 1 : 0;
 	?>
 
 	<label for="uwquickview_settings-disable" class="label checkbox-label">
