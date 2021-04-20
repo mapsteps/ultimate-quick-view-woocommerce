@@ -86,7 +86,8 @@ class Quick_View_Output extends Base_Output {
 		// Add quick view button.
 		add_action( $hook_name, array( self::get_instance(), 'add_quick_view_button' ), $hook_priority );
 
-		// Add empty div to the footer to populate div with response from ajax request.
+		add_action( 'wp_head', array( self::get_instance(), 'print_styles' ), 20 );
+
 		add_action( 'wp_footer', array( self::get_instance(), 'popup_output' ) );
 
 		$this->build_quickview_content();
@@ -114,6 +115,24 @@ class Quick_View_Output extends Base_Output {
 		<!-- End of quick view button -->
 
 		<?php
+
+	}
+
+	/**
+	 * Print quick view styles.
+	 */
+	public function print_styles() {
+
+		echo '<style>';
+		ob_start();
+
+		$css_output = require __DIR__ . '/inc/quick-view.css.php';
+		$css_output( $this );
+
+		$css = ob_get_clean();
+
+		echo apply_filters( 'uwquickview_styles', $css );
+		echo '</style>';
 
 	}
 
