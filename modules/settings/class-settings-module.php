@@ -145,7 +145,7 @@ class Settings_Module extends Base_Module {
 		// General fields.
 		add_settings_field( 'disable', __( 'Disable Quick View', 'ultimate-woo-quick-view' ), array( $this, 'disable_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
 		add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'ultimate-woo-quick-view' ), array( $this, 'disable_on_mobile_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
-		add_settings_field( 'remove-all-settings', __( 'Remove Settings on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
+		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
 
 		// Button fields.
 		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-woo-quick-view' ), array( $this, 'button_position_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
@@ -174,7 +174,7 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
-	 * Remove settings on uninstall field.
+	 * Remove data on uninstall field.
 	 */
 	public function remove_on_uninstall_field() {
 
