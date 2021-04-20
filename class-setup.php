@@ -57,11 +57,10 @@ class Setup {
 	public function set_data() {
 
 		$defaults = array(
-			'button_color_type'        => 'default',
-			'button_text_color'        => '#ffffff',
-			'button_text_accent_color' => '#ffffff',
-			'button_bg_color'          => '#9B5C8F',
-			'button_bg_accent_color'   => '#9b1482',
+			'button_text_color'        => '',
+			'button_text_accent_color' => '',
+			'button_bg_color'          => '',
+			'button_bg_accent_color'   => '',
 		);
 		$settings = get_option( 'uwquickview_settings', array() );
 		$values   = wp_parse_args( $settings, $defaults );

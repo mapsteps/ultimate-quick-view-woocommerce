@@ -21,18 +21,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<div class="uwquickview-field">
-		<select name="uwquickview_settings[button_color_type]" id="uwquickview_settings-button_color_type" class="regular-text">
-			<option value="default" <?php selected( $values['button_color_type'], 'default' ); ?>>
-				<?php _e( 'Default to theme', 'ultimate-woo-quick-view' ); ?>
-			</option>
-			<option value="custom" <?php selected( $values['button_color_type'], 'custom' ); ?>>
-				<?php _e( 'Select custom color', 'ultimate-woo-quick-view' ); ?>
-			</option>
-		</select>
-	</div>
-
-	<div class="uwquickview-inline-fields" data-show-if-field="uwquickview_settings-button_color_type" data-show-if-value="custom">
+	<div class="uwquickview-inline-fields">
 		<div class="uwquickview-field">
 			<label for="uwquickview_settings-button_text_color" class="uwquickview-label">
 				Text Color
