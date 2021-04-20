@@ -1,18 +1,18 @@
 <?php
 /**
- * Setup Ultimate Woo Quick View plugin.
+ * Setup Ultimate Quick View plugin.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview;
+namespace Ultimatequickview;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Vars;
+use Ultimatequickview\Vars;
 
 /**
- * Class to setup Ultimate Woo Quick View plugin.
+ * Class to setup Ultimate Quick View plugin.
  */
 class Setup {
 	/**
@@ -41,12 +41,12 @@ class Setup {
 
 		$this->set_data();
 
-		add_filter( 'plugin_action_links_' . plugin_basename( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( ULTIMATE_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		$this->load_modules();
 
-		register_deactivation_hook( plugin_basename( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'deactivation' ), 20 );
+		register_deactivation_hook( plugin_basename( ULTIMATE_QUICK_VIEW_PLUGIN_FILE ), array( $this, 'deactivation' ), 20 );
 
 	}
 
@@ -57,13 +57,13 @@ class Setup {
 	public function set_data() {
 
 		$defaults = array(
-			'button_text'              => __( 'Quick View', 'ultimate-woo-quick-view' ),
+			'button_text'              => __( 'Quick View', 'ultimate-quick-view-for-woocommerce' ),
 			'button_text_color'        => '',
 			'button_text_accent_color' => '',
 			'button_bg_color'          => '',
 			'button_bg_accent_color'   => '',
 		);
-		$settings = get_option( 'uwquickview_settings', array() );
+		$settings = get_option( 'uquickview_settings', array() );
 		$values   = wp_parse_args( $settings, $defaults );
 
 		Vars::set( 'default_settings', $defaults );
@@ -80,7 +80,7 @@ class Setup {
 	 */
 	public function plugin_action_links( $links ) {
 
-		$settings = array( '<a href="' . admin_url( 'admin.php?page=uwquickview_settings' ) . '">' . __( 'Settings', 'ultimate-woo-quick-view' ) . '</a>' );
+		$settings = array( '<a href="' . admin_url( 'admin.php?page=uquickview_settings' ) . '">' . __( 'Settings', 'ultimate-quick-view-for-woocommerce' ) . '</a>' );
 
 		return array_merge( $settings, $links );
 
@@ -95,7 +95,7 @@ class Setup {
 	public function admin_body_class( $classes ) {
 
 		$screens = array(
-			'woocommerce_page_uwquickview_settings',
+			'woocommerce_page_uquickview_settings',
 		);
 
 		$screen = get_current_screen();
@@ -117,18 +117,18 @@ class Setup {
 
 		$modules = array();
 
-		$modules['Uwquickview\\QuickView\\Quick_View_Module'] = __DIR__ . '/modules/quick-view/class-quick-view-module.php';
-		$modules['Uwquickview\\Settings\\Settings_Module']    = __DIR__ . '/modules/settings/class-settings-module.php';
+		$modules['Ultimatequickview\\QuickView\\Quick_View_Module'] = __DIR__ . '/modules/quick-view/class-quick-view-module.php';
+		$modules['Ultimatequickview\\Settings\\Settings_Module']    = __DIR__ . '/modules/settings/class-settings-module.php';
 
-		$modules = apply_filters( 'uwquickview_modules', $modules );
+		$modules = apply_filters( 'uquickview_modules', $modules );
 
 		foreach ( $modules as $class => $file ) {
 			$splits      = explode( '/', $file );
 			$module_name = $splits[ count( $splits ) - 2 ];
 			$filter_name = str_ireplace( '-', '_', $module_name );
-			$filter_name = 'uwquickview_' . $filter_name;
+			$filter_name = 'uquickview_' . $filter_name;
 
-			// We have a filter here uwquickview_$module_name to allow us to prevent loading modules under certain circumstances.
+			// We have a filter here uquickview_$module_name to allow us to prevent loading modules under certain circumstances.
 			if ( apply_filters( $filter_name, true ) ) {
 
 				require_once $file;
@@ -145,14 +145,14 @@ class Setup {
 	 */
 	public function deactivation() {
 
-		$settings = get_option( 'uwquickview_settings' );
+		$settings = get_option( 'uquickview_settings' );
 
 		$remove_on_uninstall = isset( $settings['remove_on_uninstall'] ) ? true : false;
-		$remove_on_uninstall = apply_filters( 'uwquickview_clean_uninstall', $remove_on_uninstall );
+		$remove_on_uninstall = apply_filters( 'uquickview_clean_uninstall', $remove_on_uninstall );
 
 		if ( $remove_on_uninstall ) {
 
-			delete_option( 'uwquickview_settings' );
+			delete_option( 'uquickview_settings' );
 
 		}
 

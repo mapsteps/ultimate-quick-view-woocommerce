@@ -2,7 +2,7 @@
 /**
  * Quick view styles based on saved settings.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
@@ -18,8 +18,8 @@ return function ( $module_output ) {
 	$values   = $module_output->values;
 	?>
 
-	.product a.uwquickview-button,
-	.product button.uwquickview-button {
+	.product a.uquickview-button,
+	.product button.uquickview-button {
 		<?php if ( $values['button_text_color'] ) : ?>
 			color: <?php echo esc_attr( $values['button_text_color'] ); ?>;
 		<?php endif; ?>
@@ -29,8 +29,8 @@ return function ( $module_output ) {
 		<?php endif; ?>
 	}
 
-	.product a.uwquickview-button:hover,
-	.product button.uwquickview-button:hover {
+	.product a.uquickview-button:hover,
+	.product button.uquickview-button:hover {
 		<?php if ( $values['button_text_accent_color'] ) : ?>
 			color: <?php echo esc_attr( $values['button_text_accent_color'] ); ?>;
 		<?php endif; ?>
@@ -42,8 +42,8 @@ return function ( $module_output ) {
 
 	@media screen and (max-width: 767px) {
 		<?php if ( isset( $settings['disable_on_mobile'] ) ) : ?>
-			.product a.uwquickview-button,
-			.product button.uwquickview-button {
+			.product a.uquickview-button,
+			.product button.uquickview-button {
 				display: none;
 			}
 		<?php endif; ?>

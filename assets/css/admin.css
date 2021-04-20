@@ -52,97 +52,97 @@
 }
 
 /* PRO styling */
-.uwquickview-pro-settings-page-notice {
+.uquickview-pro-settings-page-notice {
 	display: inline-block;
 	padding-top: 10px;
 	margin-top: 20px;
 	border-top: 1px solid #ddd;
 }
 
-.uwquickview-pro-settings-page-notice p {
+.uquickview-pro-settings-page-notice p {
 	font-style: italic;
 	display: block;
 	margin: 0 !important;
 }
 
-.uwquickview-pro-settings-page-notice .button {
+.uquickview-pro-settings-page-notice .button {
 	margin-top: 10px !important;
 }
 
 /* Featured */
-.uwquickview-featured-products > h2 {
+.uquickview-featured-products > h2 {
 	text-align: center;
 	margin-bottom: 50px;
 	font-size: 24px;
 }
 
-.uwquickview-featured-products .products {
+.uquickview-featured-products .products {
 	display: flex;
 	justify-content: space-between;
 }
 
-.uwquickview-featured-products .products li {
+.uquickview-featured-products .products li {
 	width: 32%;
 }
 
-.uwquickview-featured-products .products .subheadline {
+.uquickview-featured-products .products .subheadline {
 	font-weight: 600;
 	margin-top: -6px;
 }
 
-.uwquickview-featured-products .products img {
+.uquickview-featured-products .products img {
 	max-width: 100%;
 }
 
-.uwquickview-featured-products .credit {
+.uquickview-featured-products .credit {
 	margin-top: 20px;
 	text-align: center;
 	opacity: .5;
 }
 
 /* Fields */
-.uwquickview-fields {
+.uquickview-fields {
 	position: relative;
 }
 
-.uwquickview-field {
+.uquickview-field {
 	margin-bottom: 15px;
 }
 
-.uwquickview-inline-fields .uwquickview-field:last-child {
+.uquickview-inline-fields .uquickview-field:last-child {
 	margin-bottom: 0;
 }
 
-.uwquickview-inline-fields {
+.uquickview-inline-fields {
 	display: flex;
 	position: relative;
 }
 
-.uwquickview-inline-fields .uwquickview-field {
+.uquickview-inline-fields .uquickview-field {
 	margin-right: 10px;
 }
 
-.uwquickview-inline-fields .uwquickview-field:last-child {
+.uquickview-inline-fields .uquickview-field:last-child {
 	margin-right: 0;
 }
 
-.uwquickview-field .wp-picker-input-wrap .color-picker {
+.uquickview-field .wp-picker-input-wrap .color-picker {
 	width: 160px !important;
 }
 
-.uwquickview-field .wp-picker-input-wrap {
+.uquickview-field .wp-picker-input-wrap {
 	display: inline-flex;
 	max-width: 220px;
 	overflow: hidden;
 	transition: max-width .2s;
 }
 
-.uwquickview-field .wp-picker-input-wrap.hidden {
+.uquickview-field .wp-picker-input-wrap.hidden {
 	display: inline-flex;
 	max-width: 0;
 }
 
-.uwquickview-label {
+.uquickview-label {
 	display: block;
 	margin-bottom: 3px;
 }

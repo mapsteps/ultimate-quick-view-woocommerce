@@ -4,8 +4,8 @@
 	}
 
 	function setupOppositeCheckboxes() {
-		var disableOnAll = document.querySelector('#uwquickview_settings-disable');
-		var disableOnMobile = document.querySelector('#uwquickview_settings-disable_on_mobile');
+		var disableOnAll = document.querySelector('#uquickview_settings-disable');
+		var disableOnMobile = document.querySelector('#uquickview_settings-disable_on_mobile');
 
 		if (!disableOnAll || !disableOnMobile) return;
 

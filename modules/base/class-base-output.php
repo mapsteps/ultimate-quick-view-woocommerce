@@ -2,15 +2,15 @@
 /**
  * Base module output.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\Base;
+namespace Ultimatequickview\Base;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Vars;
-use Uwquickview\Helpers\Array_Helper;
+use Ultimatequickview\Vars;
+use Ultimatequickview\Helpers\Array_Helper;
 
 /**
  * Class to setup base output.

@@ -2,7 +2,7 @@
 /**
  * Field to disable quick view on mobile.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
@@ -17,9 +17,9 @@ return function ( $module ) {
 	$is_checked = isset( $this->settings['disable_on_mobile'] ) ? 1 : 0;
 	?>
 
-	<label for="uwquickview_settings-disable_on_mobile" class="label checkbox-label">
+	<label for="uquickview_settings-disable_on_mobile" class="label checkbox-label">
 		&nbsp;
-		<input type="checkbox" name="uwquickview_settings[disable_on_mobile]" id="uwquickview_settings-disable_on_mobile" value="1" <?php checked( $is_checked, 1 ); ?>>
+		<input type="checkbox" name="uquickview_settings[disable_on_mobile]" id="uquickview_settings-disable_on_mobile" value="1" <?php checked( $is_checked, 1 ); ?>>
 		<div class="indicator"></div>
 	</label>
 

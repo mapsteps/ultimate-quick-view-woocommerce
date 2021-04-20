@@ -2,14 +2,14 @@
 /**
  * Quick view module setup.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\QuickView;
+namespace Ultimatequickview\QuickView;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Base\Base_Module;
+use Ultimatequickview\Base\Base_Module;
 
 /**
  * Class to setup quick view module.
@@ -37,7 +37,7 @@ class Quick_View_Module extends Base_Module {
 
 		parent::__construct();
 
-		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/quick-view';
+		$this->url = ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/modules/quick-view';
 
 	}
 
@@ -87,11 +87,11 @@ class Quick_View_Module extends Base_Module {
 		$get_quickview = new Ajax\Get_Product_Quickview();
 		$add_to_cart   = new Ajax\Add_To_Cart();
 
-		add_action( 'wp_ajax_uwquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
-		add_action( 'wp_ajax_nopriv_uwquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
+		add_action( 'wp_ajax_uquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
+		add_action( 'wp_ajax_nopriv_uquickview_get_product_quickview', array( $get_quickview, 'ajax' ) );
 
-		add_action( 'wp_ajax_uwquickview_add_to_cart', array( $add_to_cart, 'ajax' ) );
-		add_action( 'wp_ajax_nopriv_uwquickview_add_to_cart', array( $add_to_cart, 'ajax' ) );
+		add_action( 'wp_ajax_uquickview_add_to_cart', array( $add_to_cart, 'ajax' ) );
+		add_action( 'wp_ajax_nopriv_uquickview_add_to_cart', array( $add_to_cart, 'ajax' ) );
 
 	}
 
@@ -100,7 +100,7 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_styles() {
 
-		wp_enqueue_style( 'uwquickview-quick-view', $this->url . '/assets/css/quick-view.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'uquickview-quick-view', $this->url . '/assets/css/quick-view.css', array(), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION );
 
 	}
 
@@ -109,17 +109,17 @@ class Quick_View_Module extends Base_Module {
 	 */
 	public function frontend_scripts() {
 
-		wp_enqueue_script( 'uwquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION, true );
 
 		wp_localize_script(
-			'uwquickview-quick-view',
-			'uwquickviewObj',
+			'uquickview-quick-view',
+			'uquickviewObj',
 			array(
-				'loader'  => ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/images/loader.gif',
+				'loader'  => ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/images/loader.gif',
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'nonces'  => array(
-					'getQuickview' => wp_create_nonce( 'uwquickview_get_product_quickview' ),
-					'addToCart'    => wp_create_nonce( 'uwquickview_add_to_cart' ),
+					'getQuickview' => wp_create_nonce( 'uquickview_get_product_quickview' ),
+					'addToCart'    => wp_create_nonce( 'uquickview_add_to_cart' ),
 				),
 			)
 		);

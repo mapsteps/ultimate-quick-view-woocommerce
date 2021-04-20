@@ -2,14 +2,14 @@
 /**
  * Quick view module output.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\QuickView;
+namespace Ultimatequickview\QuickView;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Base\Base_Output;
+use Ultimatequickview\Base\Base_Output;
 
 /**
  * Class to setup dashboard output.
@@ -37,7 +37,7 @@ class Quick_View_Output extends Base_Output {
 
 		parent::__construct();
 
-		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/feature';
+		$this->url = ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/modules/feature';
 
 	}
 
@@ -107,9 +107,9 @@ class Quick_View_Output extends Base_Output {
 		?>
 
 		<!-- Start quick view button -->
-		<button id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uwquickview-button uwquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
+		<button id="uquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uquickview-button uquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
 			<?php
-			echo esc_attr( apply_filters( 'uwquickview_button_text', $this->values['button_text'] ) );
+			echo esc_attr( apply_filters( 'uquickview_button_text', $this->values['button_text'] ) );
 			?>
 		</button>
 		<!-- End of quick view button -->
@@ -131,7 +131,7 @@ class Quick_View_Output extends Base_Output {
 
 		$css = ob_get_clean();
 
-		echo apply_filters( 'uwquickview_styles', $css );
+		echo apply_filters( 'uquickview_styles', $css );
 		echo '</style>';
 
 	}
@@ -145,11 +145,11 @@ class Quick_View_Output extends Base_Output {
 		$this->enqueue_scripts();
 		?>
 
-		<div class="uwquickview-popup">
-			<span class="uwquickview-close-popup"></span>
+		<div class="uquickview-popup">
+			<span class="uquickview-close-popup"></span>
 
-			<div class="uwquickview-popup-content">
-				<div id="uwquickview-popup-product" class="woocommerce single-product"></div>
+			<div class="uquickview-popup-content">
+				<div id="uquickview-popup-product" class="woocommerce single-product"></div>
 			</div>
 		</div>
 
@@ -195,25 +195,25 @@ class Quick_View_Output extends Base_Output {
 	public function build_quickview_content() {
 
 		// Product's image.
-		add_action( 'uwquickview_product_image', 'woocommerce_show_product_images' );
+		add_action( 'uquickview_product_image', 'woocommerce_show_product_images' );
 
 		// Product's title.
-		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_title' );
+		add_action( 'uquickview_product_summary', 'woocommerce_template_single_title' );
 
 		// Product's rating.
-		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_rating' );
+		add_action( 'uquickview_product_summary', 'woocommerce_template_single_rating' );
 
 		// Product's price.
-		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_price' );
+		add_action( 'uquickview_product_summary', 'woocommerce_template_single_price' );
 
 		// Product's excerpt.
-		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_excerpt' );
+		add_action( 'uquickview_product_summary', 'woocommerce_template_single_excerpt' );
 
 		// Quantity & add to cart button.
-		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_add_to_cart' );
+		add_action( 'uquickview_product_summary', 'woocommerce_template_single_add_to_cart' );
 
 		// Product's meta.
-		add_action( 'uwquickview_product_summary', 'woocommerce_template_single_meta' );
+		add_action( 'uquickview_product_summary', 'woocommerce_template_single_meta' );
 
 	}
 

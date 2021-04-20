@@ -16,9 +16,9 @@
 	}
 }
 
-.product a.uwquickview-button,
-.product button.uwquickview-button,
-.product .uwquickview-button {
+.product a.uquickview-button,
+.product button.uquickview-button,
+.product .uquickview-button {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
@@ -28,13 +28,13 @@
 	user-select: none;
 }
 
-.product .uwquickview-button.is-loading {
+.product .uquickview-button.is-loading {
 	justify-content: center;
 	color: transparent !important;
 	pointer-events: none;
 }
 
-.product .uwquickview-button.is-loading::after {
+.product .uquickview-button.is-loading::after {
 	content: "";
 	position: absolute;
 	width: 1em;
@@ -49,7 +49,7 @@
 	animation: loadingSpinAround 0.5s infinite linear;
 }
 
-.uwquickview-popup {
+.uquickview-popup {
 	display: none;
 	align-items: center;
 	justify-content: center;
@@ -63,7 +63,7 @@
 	z-index: 999;
 }
 
-.uwquickview-close-popup {
+.uquickview-close-popup {
 	position: absolute;
 	display: inline-block;
 	right: 21px;
@@ -78,8 +78,8 @@
 	transition: 0.2s opacity;
 }
 
-.uwquickview-close-popup::before,
-.uwquickview-close-popup::after {
+.uquickview-close-popup::before,
+.uquickview-close-popup::after {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -91,19 +91,19 @@
 	border-radius: 1px;
 }
 
-.uwquickview-close-popup::before {
+.uquickview-close-popup::before {
 	transform: rotate(45deg);
 }
 
-.uwquickview-close-popup::after {
+.uquickview-close-popup::after {
 	transform: rotate(-45deg);
 }
 
-.uwquickview-close-popup:hover {
+.uquickview-close-popup:hover {
 	opacity: 1;
 }
 
-.uwquickview-popup-content {
+.uquickview-popup-content {
 	margin-left: auto;
 	margin-right: auto;
 	width: 900px;
@@ -114,15 +114,15 @@
 	z-index: 9999;
 }
 
-.uwquickview-popup-content div.product div.images {
+.uquickview-popup-content div.product div.images {
 	margin-bottom: 0;
 }
 
-.uwquickview-popup-content div.product div.summary {
+.uquickview-popup-content div.product div.summary {
 	margin-bottom: 0;
 	padding: 40px;
 }
 
-.uwquickview-popup-content div.product figure {
+.uquickview-popup-content div.product figure {
 	margin-bottom: 0;
 }

@@ -2,15 +2,15 @@
 /**
  * Quick view module setup.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\Settings;
+namespace Ultimatequickview\Settings;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Vars;
-use Uwquickview\Base\Base_Module;
+use Ultimatequickview\Vars;
+use Ultimatequickview\Base\Base_Module;
 
 /**
  * Class to setup quick view module.
@@ -38,7 +38,7 @@ class Settings_Module extends Base_Module {
 
 		parent::__construct();
 
-		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/settings';
+		$this->url = ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/modules/settings';
 
 	}
 
@@ -77,7 +77,7 @@ class Settings_Module extends Base_Module {
 	 */
 	public function submenu_page() {
 
-		add_submenu_page( 'woocommerce', __( 'Quick View', 'ultimate-woo-quick-view' ), __( 'Quick View', 'ultimate-woo-quick-view' ), apply_filters( 'uwquickview_settings_capability', 'manage_options' ), 'uwquickview_settings', array( $this, 'submenu_page_content' ) );
+		add_submenu_page( 'woocommerce', __( 'Quick View', 'ultimate-quick-view-for-woocommerce' ), __( 'Quick View', 'ultimate-quick-view-for-woocommerce' ), apply_filters( 'uquickview_settings_capability', 'manage_options' ), 'uquickview_settings', array( $this, 'submenu_page_content' ) );
 
 	}
 
@@ -101,8 +101,8 @@ class Settings_Module extends Base_Module {
 		}
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'heatbox', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/heatbox.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
-		wp_enqueue_style( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'heatbox', ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/css/heatbox.css', array(), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION );
+		wp_enqueue_style( 'uquickview-admin', ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/css/admin.css', array(), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION );
 
 	}
 
@@ -115,16 +115,16 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
-		wp_register_script( 'wp-color-picker-alpha', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '3.0.0', true );
+		wp_register_script( 'wp-color-picker-alpha', ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '3.0.0', true );
 		wp_add_inline_script(
 			'wp-color-picker-alpha',
 			'jQuery( function() { jQuery( ".color-picker" ).wpColorPicker(); } );'
 		);
 		wp_enqueue_script( 'wp-color-picker-alpha' );
 
-		wp_enqueue_script( 'mapsteps-polyfills', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/polyfills.js', array(), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
-		wp_enqueue_script( 'uwquickview-admin', ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker-alpha', 'mapsteps-polyfills' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
-		wp_enqueue_script( 'uwquickview-settings', $this->url . '/assets/js/settings.js', array( 'uwquickview-admin' ), ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'mapsteps-polyfills', ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/js/polyfills.js', array(), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uquickview-admin', ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker-alpha', 'mapsteps-polyfills' ), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'uquickview-settings', $this->url . '/assets/js/settings.js', array( 'uquickview-admin' ), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION, true );
 
 	}
 
@@ -134,23 +134,23 @@ class Settings_Module extends Base_Module {
 	public function add_settings() {
 
 		// Register settings.
-		register_setting( 'uwquickview-settings-group', 'uwquickview_settings' );
+		register_setting( 'uquickview-settings-group', 'uquickview_settings' );
 
 		// Register sections.
-		add_settings_section( 'uwquickview-general-section', __( 'General Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-general-settings' );
-		add_settings_section( 'uwquickview-button-section', __( 'Quick View Button Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-button-settings' );
-		add_settings_section( 'uwquickview-popup-section', __( 'Popup Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-popup-settings' );
-		add_settings_section( 'uwquickview-custom-section', __( 'Custom Settings', 'ultimate-woo-quick-view' ), '', 'uwquickview-custom-settings' );
+		add_settings_section( 'uquickview-general-section', __( 'General Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-general-settings' );
+		add_settings_section( 'uquickview-button-section', __( 'Quick View Button Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-button-settings' );
+		add_settings_section( 'uquickview-popup-section', __( 'Popup Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-popup-settings' );
+		add_settings_section( 'uquickview-custom-section', __( 'Custom Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-custom-settings' );
 
 		// General fields.
-		add_settings_field( 'disable', __( 'Disable Quick View', 'ultimate-woo-quick-view' ), array( $this, 'disable_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
-		add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'ultimate-woo-quick-view' ), array( $this, 'disable_on_mobile_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
-		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-woo-quick-view' ), array( $this, 'remove_on_uninstall_field' ), 'uwquickview-general-settings', 'uwquickview-general-section' );
+		add_settings_field( 'disable', __( 'Disable Quick View', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'disable_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
+		add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'disable_on_mobile_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
+		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'remove_on_uninstall_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
 
 		// Button fields.
-		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-woo-quick-view' ), array( $this, 'button_position_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
-		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-woo-quick-view' ), array( $this, 'button_text_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
-		add_settings_field( 'button-colors', __( 'Button Colors', 'ultimate-woo-quick-view' ), array( $this, 'button_colors_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
+		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'button_position_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
+		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'button_text_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
+		add_settings_field( 'button-colors', __( 'Button Colors', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'button_colors_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
 	}
 
 	/**

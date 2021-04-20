@@ -2,10 +2,10 @@
 /**
  * Array helper.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\Helpers;
+namespace Ultimatequickview\Helpers;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 

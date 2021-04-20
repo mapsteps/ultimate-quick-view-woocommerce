@@ -2,10 +2,10 @@
 /**
  * Setter & getter utility
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview;
+namespace Ultimatequickview;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 

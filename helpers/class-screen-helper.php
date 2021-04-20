@@ -2,10 +2,10 @@
 /**
  * Screen helper.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\Helpers;
+namespace Ultimatequickview\Helpers;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -21,7 +21,7 @@ class Screen_Helper {
 	public function is_quick_view() {
 
 		$current_screen = get_current_screen();
-		return ( 'woocommerce_page_uwquickview_settings' === $current_screen->id ? true : false );
+		return ( 'woocommerce_page_uquickview_settings' === $current_screen->id ? true : false );
 
 	}
 }

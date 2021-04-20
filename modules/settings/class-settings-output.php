@@ -2,14 +2,14 @@
 /**
  * Settings module output.
  *
- * @package Ultimate_Woo_Quick_View
+ * @package Ultimate_Quick_View
  */
 
-namespace Uwquickview\Settings;
+namespace Ultimatequickview\Settings;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Base\Base_Output;
+use Ultimatequickview\Base\Base_Output;
 
 /**
  * Class to setup dashboard output.
@@ -35,7 +35,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function __construct() {
 
-		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/settings';
+		$this->url = ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/modules/settings';
 
 	}
 
