@@ -68,8 +68,11 @@ class Add_To_Cart {
 
 		$this->quantity     = absint( $_POST['quantity'] );
 		$this->is_variation = isset( $_POST['is_variation'] ) ? absint( $_POST['is_variation'] ) : 0;
-		// TODO: loop over $this->attributes and sanitize the items inside the loop.
-		$this->attributes = isset( $_POST['attributes'] ) ? $_POST['attributes'] : array();
+		$this->attributes   = isset( $_POST['attributes'] ) ? $_POST['attributes'] : array();
+
+		foreach ( $this->attributes as $attribute_key => $attribute_value ) {
+			$this->attributes[ $attribute_key ] = sanitize_text_field( $attribute_value );
+		}
 
 		$this->save();
 
