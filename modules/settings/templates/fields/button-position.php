@@ -12,9 +12,9 @@ return function () {
 	$settings = get_option( 'uquickview_settings' );
 	$value    = isset( $settings['button_position'] ) ? $settings['button_position'] : 'woocommerce_before_shop_loop_item_title';
 	$options  = array(
-		'woocommerce_before_shop_loop_item_title' => __( 'Under product image', 'ultimate-quick-view-for-woocommerce' ),
-		'woocommerce_after_shop_loop_item_9'      => __( 'Before "Add to cart" button', 'ultimate-quick-view-for-woocommerce' ),
-		'woocommerce_after_shop_loop_item_20'     => __( 'After "Add to cart" button', 'ultimate-quick-view-for-woocommerce' ),
+		'woocommerce_before_shop_loop_item_title' => __( 'Under product image', 'ultimate-quick-view-woocommerce' ),
+		'woocommerce_after_shop_loop_item_9'      => __( 'Before "Add to cart" button', 'ultimate-quick-view-woocommerce' ),
+		'woocommerce_after_shop_loop_item_20'     => __( 'After "Add to cart" button', 'ultimate-quick-view-woocommerce' ),
 	);
 	?>
 

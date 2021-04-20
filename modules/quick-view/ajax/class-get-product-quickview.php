@@ -29,17 +29,17 @@ class Get_Product_Quickview {
 		$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'uquickview_get_product_quickview' ) ) {
-			wp_send_json_error( __( 'Invalid token', 'ultimate-quick-view-for-woocommerce' ), 401 );
+			wp_send_json_error( __( 'Invalid token', 'ultimate-quick-view-woocommerce' ), 401 );
 		}
 
 		if ( ! isset( $_GET['product_id'] ) || ! $_GET['product_id'] ) {
-			wp_send_json_error( __( 'Product id is required', 'ultimate-quick-view-for-woocommerce' ), 401 );
+			wp_send_json_error( __( 'Product id is required', 'ultimate-quick-view-woocommerce' ), 401 );
 		}
 
 		$this->product_id = absint( $_GET['product_id'] );
 
 		if ( ! get_post( $this->product_id ) ) {
-			wp_send_json_error( __( "Product doesn't exist", 'ultimate-quick-view-for-woocommerce' ), 401 );
+			wp_send_json_error( __( "Product doesn't exist", 'ultimate-quick-view-woocommerce' ), 401 );
 		}
 
 		$this->get_output();

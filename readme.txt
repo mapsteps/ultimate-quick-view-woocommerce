@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 A neat & clean - no bells and whistles - Quick View Plugin for WooCommerce.
 
 == Installation ==
-1. Download the ultimate-quick-view-for-woocommerce.zip file to your computer.
+1. Download the ultimate-quick-view-woocommerce.zip file to your computer.
 1. Unzip the file.
 1. Upload the swift-control folder to your `/wp-content/plugins/` directory.
 1. Activate the plugin through the *Plugins* widget in WordPress.

@@ -77,7 +77,7 @@ class Settings_Module extends Base_Module {
 	 */
 	public function submenu_page() {
 
-		add_submenu_page( 'woocommerce', __( 'Quick View', 'ultimate-quick-view-for-woocommerce' ), __( 'Quick View', 'ultimate-quick-view-for-woocommerce' ), apply_filters( 'uquickview_settings_capability', 'manage_options' ), 'uquickview_settings', array( $this, 'submenu_page_content' ) );
+		add_submenu_page( 'woocommerce', __( 'Quick View', 'ultimate-quick-view-woocommerce' ), __( 'Quick View', 'ultimate-quick-view-woocommerce' ), apply_filters( 'uquickview_settings_capability', 'manage_options' ), 'uquickview_settings', array( $this, 'submenu_page_content' ) );
 
 	}
 
@@ -137,20 +137,20 @@ class Settings_Module extends Base_Module {
 		register_setting( 'uquickview-settings-group', 'uquickview_settings' );
 
 		// Register sections.
-		add_settings_section( 'uquickview-general-section', __( 'General Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-general-settings' );
-		add_settings_section( 'uquickview-button-section', __( 'Quick View Button Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-button-settings' );
-		add_settings_section( 'uquickview-popup-section', __( 'Popup Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-popup-settings' );
-		add_settings_section( 'uquickview-custom-section', __( 'Custom Settings', 'ultimate-quick-view-for-woocommerce' ), '', 'uquickview-custom-settings' );
+		add_settings_section( 'uquickview-general-section', __( 'General Settings', 'ultimate-quick-view-woocommerce' ), '', 'uquickview-general-settings' );
+		add_settings_section( 'uquickview-button-section', __( 'Quick View Button Settings', 'ultimate-quick-view-woocommerce' ), '', 'uquickview-button-settings' );
+		add_settings_section( 'uquickview-popup-section', __( 'Popup Settings', 'ultimate-quick-view-woocommerce' ), '', 'uquickview-popup-settings' );
+		add_settings_section( 'uquickview-custom-section', __( 'Custom Settings', 'ultimate-quick-view-woocommerce' ), '', 'uquickview-custom-settings' );
 
 		// General fields.
-		add_settings_field( 'disable', __( 'Disable Quick View', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'disable_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
-		add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'disable_on_mobile_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
-		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'remove_on_uninstall_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
+		add_settings_field( 'disable', __( 'Disable Quick View', 'ultimate-quick-view-woocommerce' ), array( $this, 'disable_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
+		add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'ultimate-quick-view-woocommerce' ), array( $this, 'disable_on_mobile_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
+		add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'ultimate-quick-view-woocommerce' ), array( $this, 'remove_on_uninstall_field' ), 'uquickview-general-settings', 'uquickview-general-section' );
 
 		// Button fields.
-		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'button_position_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
-		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'button_text_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
-		add_settings_field( 'button-colors', __( 'Button Colors', 'ultimate-quick-view-for-woocommerce' ), array( $this, 'button_colors_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
+		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-quick-view-woocommerce' ), array( $this, 'button_position_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
+		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-quick-view-woocommerce' ), array( $this, 'button_text_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
+		add_settings_field( 'button-colors', __( 'Button Colors', 'ultimate-quick-view-woocommerce' ), array( $this, 'button_colors_field' ), 'uquickview-button-settings', 'uquickview-button-section' );
 	}
 
 	/**

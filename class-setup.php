@@ -57,7 +57,7 @@ class Setup {
 	public function set_data() {
 
 		$defaults = array(
-			'button_text'              => __( 'Quick View', 'ultimate-quick-view-for-woocommerce' ),
+			'button_text'              => __( 'Quick View', 'ultimate-quick-view-woocommerce' ),
 			'button_text_color'        => '',
 			'button_text_accent_color' => '',
 			'button_bg_color'          => '',
@@ -80,7 +80,7 @@ class Setup {
 	 */
 	public function plugin_action_links( $links ) {
 
-		$settings = array( '<a href="' . admin_url( 'admin.php?page=uquickview_settings' ) . '">' . __( 'Settings', 'ultimate-quick-view-for-woocommerce' ) . '</a>' );
+		$settings = array( '<a href="' . admin_url( 'admin.php?page=uquickview_settings' ) . '">' . __( 'Settings', 'ultimate-quick-view-woocommerce' ) . '</a>' );
 
 		return array_merge( $settings, $links );
 

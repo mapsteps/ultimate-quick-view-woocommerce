@@ -53,17 +53,17 @@ class Add_To_Cart {
 		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'uquickview_add_to_cart' ) ) {
-			wp_send_json_error( __( 'Invalid token', 'ultimate-quick-view-for-woocommerce' ), 401 );
+			wp_send_json_error( __( 'Invalid token', 'ultimate-quick-view-woocommerce' ), 401 );
 		}
 
 		if ( ! isset( $_POST['product_id'] ) || ! $_POST['product_id'] ) {
-			wp_send_json_error( __( 'Product id is required', 'ultimate-quick-view-for-woocommerce' ), 401 );
+			wp_send_json_error( __( 'Product id is required', 'ultimate-quick-view-woocommerce' ), 401 );
 		}
 
 		$this->product_id = absint( $_POST['product_id'] );
 
 		if ( ! get_post( $this->product_id ) ) {
-			wp_send_json_error( __( "Product doesn't exist", 'ultimate-quick-view-for-woocommerce' ), 401 );
+			wp_send_json_error( __( "Product doesn't exist", 'ultimate-quick-view-woocommerce' ), 401 );
 		}
 
 		$this->quantity     = absint( $_POST['quantity'] );
@@ -83,7 +83,7 @@ class Add_To_Cart {
 		try {
 
 			$response = array(
-				'message'    => __( 'Product has been added to cart', 'ultimate-quick-view-for-woocommerce' ),
+				'message'    => __( 'Product has been added to cart', 'ultimate-quick-view-woocommerce' ),
 				'product_id' => $this->product_id,
 				'quantity'   => $this->quantity,
 			);
@@ -105,7 +105,7 @@ class Add_To_Cart {
 
 			wp_send_json_success( $response );
 		} catch ( \Exception $e ) {
-			wp_send_json_error( __( 'Something went wrong', 'ultimate-quick-view-for-woocommerce' ), 500 );
+			wp_send_json_error( __( 'Something went wrong', 'ultimate-quick-view-woocommerce' ), 500 );
 		}
 
 	}
