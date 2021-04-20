@@ -1,23 +1,20 @@
 <?php
 /**
- * Button color type field.
+ * Button colors field.
  *
  * @package Ultimate_Woo_Quick_View
  */
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Uwquickview\Vars;
-
 /**
- * Outputting button color type field.
+ * Outputting button colors field.
  *
  * @param Settings_Module $module The Settings_Module instance.
  */
 return function ( $module ) {
 
 	$defaults = $module->defaults;
-	$settings = $module->settings;
 	$values   = $module->values;
 	?>
 

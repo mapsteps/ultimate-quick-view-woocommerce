@@ -35,6 +35,8 @@ class Quick_View_Output extends Base_Output {
 	 */
 	public function __construct() {
 
+		parent::__construct();
+
 		$this->url = ULTIMATE_WOO_QUICK_VIEW_PLUGIN_URL . '/modules/feature';
 
 	}
@@ -67,13 +69,11 @@ class Quick_View_Output extends Base_Output {
 	 */
 	public function setup() {
 
-		$settings = get_option( 'uwquickview_settings', array() );
-
 		$hook_name     = 'woocommerce_before_shop_loop_item_title';
 		$hook_priority = 20;
 
-		if ( isset( $settings['button_position'] ) ) {
-			$button_position = $settings['button_position'];
+		if ( isset( $this->settings['button_position'] ) ) {
+			$button_position = $this->settings['button_position'];
 			$exploded_values = explode( '_', $button_position );
 			$last_partial    = end( $exploded_values );
 
@@ -108,11 +108,7 @@ class Quick_View_Output extends Base_Output {
 		<!-- Start quick view button -->
 		<button id="uwquickview_product_id_<?php echo absint( $product_id ); ?>" class="button uwquickview-button uwquickview-view-button" data-product-id="<?php echo absint( $product_id ); ?>" aria-hidden="true">
 			<?php
-			$settings    = get_option( 'uwquickview_settings' );
-			$default     = __( 'Quick View', 'ultimate-woo-quick-view' );
-			$button_text = isset( $settings['button_text'] ) && ! empty( $settings['button_text'] ) ? $settings['button_text'] : $default;
-
-			echo esc_attr( apply_filters( 'uwquickview_button_text', $button_text ) );
+			echo esc_attr( apply_filters( 'uwquickview_button_text', $this->values['button_text'] ) );
 			?>
 		</button>
 		<!-- End of quick view button -->

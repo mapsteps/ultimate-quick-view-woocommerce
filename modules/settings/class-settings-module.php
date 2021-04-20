@@ -150,7 +150,7 @@ class Settings_Module extends Base_Module {
 		// Button fields.
 		add_settings_field( 'button-position', __( 'Button Position', 'ultimate-woo-quick-view' ), array( $this, 'button_position_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
 		add_settings_field( 'button-text', __( 'Button Text', 'ultimate-woo-quick-view' ), array( $this, 'button_text_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
-		add_settings_field( 'button-color-type', __( 'Button Color', 'ultimate-woo-quick-view' ), array( $this, 'button_color_type_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
+		add_settings_field( 'button-colors', __( 'Button Colors', 'ultimate-woo-quick-view' ), array( $this, 'button_colors_field' ), 'uwquickview-button-settings', 'uwquickview-button-section' );
 	}
 
 	/**
@@ -199,16 +199,16 @@ class Settings_Module extends Base_Module {
 	public function button_text_field() {
 
 		$field = require __DIR__ . '/templates/fields/button-text.php';
-		$field();
+		$field( $this );
 
 	}
 
 	/**
-	 * Button color type field.
+	 * Button color field.
 	 */
-	public function button_color_type_field() {
+	public function button_colors_field() {
 
-		$field = require __DIR__ . '/templates/fields/button-color-type.php';
+		$field = require __DIR__ . '/templates/fields/button-colors.php';
 		$field( $this );
 
 	}

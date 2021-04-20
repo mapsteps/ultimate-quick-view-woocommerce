@@ -7,14 +7,18 @@
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-return function () {
+/**
+ * Outputting button colors field.
+ *
+ * @param Settings_Module $module The Settings_Module instance.
+ */
+return function ( $module ) {
 
-	$settings = get_option( 'uwquickview_settings' );
-	$default  = __( 'Quick View', 'ultimate-woo-quick-view' );
-	$value    = isset( $settings['button_text'] ) ? $settings['button_text'] : $default;
+	$defaults = $module->defaults;
+	$values   = $module->values;
 	?>
 
-	<input type="text" name="uwquickview_settings[button_text]" class="regular-text" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php echo esc_attr( $default ); ?>" />
+	<input type="text" name="uwquickview_settings[button_text]" class="regular-text" value="<?php echo esc_attr( $values['button_text'] ); ?>" placeholder="<?php echo esc_attr( $defaults['button_text'] ); ?>" />
 
 	<?php
 

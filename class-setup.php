@@ -57,6 +57,7 @@ class Setup {
 	public function set_data() {
 
 		$defaults = array(
+			'button_text'              => __( 'Quick View', 'ultimate-woo-quick-view' ),
 			'button_text_color'        => '',
 			'button_text_accent_color' => '',
 			'button_bg_color'          => '',
