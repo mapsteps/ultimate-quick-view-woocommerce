@@ -1,6 +1,6 @@
 <?php
 /**
- * Setup Woocommerce Quick View plugin.
+ * Setup Ultimate Woo Quick View plugin.
  *
  * @package Ultimate_Woo_Quick_View
  */
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 use Uwquickview\Vars;
 
 /**
- * Class to setup Woocommerce Quick View plugin.
+ * Class to setup Ultimate Woo Quick View plugin.
  */
 class Setup {
 	/**
@@ -31,10 +31,10 @@ class Setup {
 	 */
 	public function setup() {
 
-		// This plugin depends on Woocommerce, so let's check if it's active.
+		// This plugin depends on WooCommerce, so let's check if it's active.
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
-			// Stop if Woocommerce is not installed or not active.
+			// Stop if WooCommerce is not installed or not active.
 			return;
 
 		}

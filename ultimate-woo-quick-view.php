@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Ultimate Quick View for WooCommerce
- * Plugin URI: https://woocommercequickview.com
+ * Plugin URI: https://mapsteps.com
  * Description: A neat & clean Quick View plugin for WooCommerce.
  * Version: 1.0
  * Author: David Vongries

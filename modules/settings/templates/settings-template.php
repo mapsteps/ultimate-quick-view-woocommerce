@@ -23,7 +23,7 @@ return function () {
 							<?php _e( 'Ultimate Quick View for WooCommerce', 'ultimate-woo-quick-view' ); ?>
 							<span class="version"><?php echo esc_html( ULTIMATE_WOO_QUICK_VIEW_PLUGIN_VERSION ); ?></span>
 						</span>
-						<p class="subtitle"><?php _e( 'The #1 plugin to quick view your Woocommerce products.', 'ultimate-woo-quick-view' ); ?></p>
+						<p class="subtitle"><?php _e( 'A neat & clean plugin to quick view your WooCommerce products.', 'ultimate-woo-quick-view' ); ?></p>
 					</div>
 
 					<div>
