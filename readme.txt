@@ -8,7 +8,25 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-A neat & clean - no bells and whistles - Quick View Plugin for WooCommerce.
+Ultimate Quick View for WooCommerce is a clean & lightweight plugin for your online store.
+
+Allow your store visitors to quick-view products without having to actually open the product page. This results in a better user experience, reduces load time and can help boost conversions.
+
+=== Quick View Features ===
+
+* Disable quick view on mobile devices
+* Change the quick view button position (below image, before & after add to cart button)
+* Change the quick view button text
+* Change the quick view button colors
+* more settings to come!
+
+=== What's next? ===
+
+If you like Ultimate Quick View for WooCommerce make sure to check out our other free products:
+
+* **[Page Builder Framework](https://wp-pagebuilderframework.com/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=wpbf)** - A fast & minimalistic WordPress theme designed for the new WordPress era.
+* **[Ultimate Dashboard](https://ultimatedashboard.io/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=udb)** - The #1 WordPress plugin to customize your WordPress dashboard and admin area.
+* **[WP Swift Control](https://wpswiftcontrol.com/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=swiftcontrol)** - The plugin to make your clients enjoy WordPress. It replaces the default admin bar to provide the best possible user experience when editing & navigating a website.
 
 == Installation ==
 1. Download the ultimate-quick-view-woocommerce.zip file to your computer.
@@ -18,7 +36,7 @@ A neat & clean - no bells and whistles - Quick View Plugin for WooCommerce.
 
 == Frequently Asked Questions ==
 = Where can I tweak the plugin settings? =
-Navigate to WooCommerce > Quick View to configure the plugin.
+To configure the quick view popup, please navigate to WooCommerce > Quick View.
 
 == Screenshots ==
 1. Ultimate Quick View Modal
