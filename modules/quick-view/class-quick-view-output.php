@@ -65,7 +65,7 @@ class Quick_View_Output extends Base_Output {
 	}
 
 	/**
-	 * Setup dashboard output.
+	 * Setup quick view output.
 	 */
 	public function setup() {
 

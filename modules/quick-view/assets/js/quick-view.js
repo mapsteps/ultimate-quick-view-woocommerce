@@ -5,6 +5,8 @@
  * - uquickviewObj
  */
 (function ($) {
+	if (!wc_add_to_cart_params || !uquickviewObj) return;
+
 	var popup = document.querySelector('.uquickview-popup');
 	var popupProduct = document.querySelector('#uquickview-popup-product');
 	if (!popup || !popupProduct) return;
@@ -15,8 +17,11 @@
 		isRequesting: false
 	};
 
-	var loading = {}
 	var speed = 300;
+	var loading = {};
+	var ajax = {};
+
+	ajax.addToCart = {};
 
 	/**
 	 * Init the plugin.
@@ -29,7 +34,7 @@
 	 * Setup the popup.
 	 */
 	function setupPopup() {
-		$(document).on('click', '.uquickview-view-button', loadQuickView);
+		$(document).on('click', '.uquickview-view-button', ajax.loadQuickView);
 
 		// Close popup by clicking on close button.
 		$(document).on('click', '.uquickview-close-popup', closeQuickViewPopup);
@@ -43,7 +48,7 @@
 
 		// Close popup by tapping the escape key.
 		document.addEventListener('keyup', function (e) {
-			if (e.key !== 'Escape' && e.key !== 'Esc' && e.keyCode !== 27) return;
+			if (e.key !== 'Escape' && e.key !== 'Esc') return;
 			if ($popup.is(':visible')) closeQuickViewPopup();
 		});
 
@@ -61,7 +66,7 @@
 	/**
 	 * Load quick view output through ajax request.
 	 */
-	function loadQuickView(e) {
+	ajax.loadQuickView = function (e) {
 		e.preventDefault();
 
 		if (state.isRequesting) return;
@@ -70,16 +75,16 @@
 		var productId = this.dataset.productId;
 		var button = this;
 
-		loading.start(this);
+		loading.start(button);
 
 		$.ajax({
 			url: uquickviewObj.ajaxurl,
 			type: 'GET',
+			cache: false,
 			dataType: 'json',
 			data: {
 				product_id: productId,
-				action: 'uquickview_get_product_quickview',
-				nonce: uquickviewObj.nonces.getQuickview,
+				action: 'uquickview_get_product_quickview'
 			}
 		}).done(function (r) {
 			popupProduct.innerHTML = r.data;
@@ -128,87 +133,151 @@
 	}
 
 	/**
-	 * Add product to cart through ajax request.
+	 * Ajax add to cart functionality.
+	 *
+	 * @see wp-content/plugins/woocommerce/includes/class-wc-ajax.php
+	 * @see wp-content/plugins/woocommerce/includes/class-wc-form-handler.php
 	 */
 	function addToCart(e) {
 		e.preventDefault();
-		e.stopImmediatePropagation();
 
+		var product = document.querySelector('#uquickview-popup-product .type-product');
+		var isVariable = product.classList.contains('product-type-variable');
+		var isGrouped = product.classList.contains('product-type-grouped');
+
+		// If this is variable or grouped product type.
+		if (isVariable || isGrouped) {
+
+			ajax.addToCart.advancedProduct(product);
+			return;
+
+		}
+
+		// If this is a simple product type.
+		ajax.addToCart.simpleProduct(product);
+	}
+
+	/**
+	 * Add to cart for variable / grouped product type.
+	 * 
+	 * This function uses our `add_to_cart` ajax handler in woocommerce-quick-view.php file.
+	 * However, our handler is only about preparing the response & adjusting wc notices.
+	 *
+	 * The core functionality is using Woocommerce's default `add_to_cart_action` function
+	 * inside  class-wc-form-handler.php file.
+	 * 
+	 * The `add_to_cart_action` is hooked into `wp_loaded` by Woocommerce.
+	 *
+	 * @see wp-content/plugins/woocommerce/includes/class-wc-form-handler.php
+	 * @see wp-content/plugins/page-builder-framework-premium-add-on/inc/integration/woocommerce/woocommerce-quick-view.php
+	 *
+	 * @param HTMLElement product The product area inside quick view modal.
+	 */
+	ajax.addToCart.advancedProduct = function (product) {
 		if (state.isRequesting) return;
 		state.isRequesting = true;
 
-		var button = this;
+		var button = product.querySelector('.single_add_to_cart_button');
+		loading.start(button);
 
-		loading.start(this);
+		var cartForm = product.querySelector('form.cart');
+		var addToCartField = cartForm.querySelector('[name="add-to-cart"]');
+		var qtyField = cartForm.querySelector('[name="quantity"]');
 
-		var variationForm = $(this).parents('.variations_form');
-		var variationBag = {};
-		var isError = false;
-		var	payload = {};
-		var	quantity = $(this).parents('.cart').find('input[name="quantity"]').val();
-		var isVariation = variationForm.length > 0;
-		var productId = isVariation === true ? variationForm.data('product_id') : $(this).val();
-		var variationId = variationForm.find('input[name="variation_id"]').val();
-		var variations = variationForm.find('select[name^=attribute]');
+		var isVariable = product.classList.contains('product-type-variable');
+		var isGrouped = product.classList.contains('product-type-grouped');
 
-		if (!variations.length) {
-			variations = variationForm.find('[name^=attribute]:checked');
-		}
+		var productId = addToCartField.value;
 
-		if (!variations.length) {
-			variations = variationForm.find('input[name^=attribute]');
-		}
+		/**
+		 * The submission payload format.
+		 * 
+		 * Below are the payload format for variable and grouped products.
+		 * The value of `add-to-cart` (by Woocommerce) is product_id.
+		 * 
+		 * Variable product:
+		 * {
+		 * 		add-to-cart: 200,
+		 * 		product_id: 200,
+		 * 		quantity: 1,
+		 * 		variation_id: 100,
+		 * 		attribute_sample: sampleValue,
+		 * 		attribute_another: anotherValue,
+		 * 		attribute_more: moreValue
+		 * }
+		 * 
+		 * Grouped product (doesn't require `product_id`):
+		 * {
+		 * 		add-to-cart: 200,
+		 * 		quantity: {
+		 * 			205: 1,
+		 * 			206: 2,
+		 * 			207: 1
+		 * 		}
+		 * }
+		 */
+		var payload = {};
 
-		variations.each(function () {
-			var $this = $(this);
-			var attributeName = $this.attr('name');
-			var attributevalue = $this.val();
-			var index;
-			var variationName;
-
-			$this.removeClass('error');
-
-			if (!attributevalue.length) {
-				index = attributeName.lastIndexOf('_');
-				variationName = attributeName.substring(index + 1);
-				isError = true;
-
-				$('.wpbf-woo-quick-view-modal-content select').each(function () {
-					if (!$(this).val()) {
-						$(this).addClass('select-error');
-					}
-				});
-			} else {
-				variationBag[attributeName] = attributevalue;
-			}
-		});
-
-		// Stop if there is any error.
-		if (isError) return;
-		
 		payload.action = 'uquickview_add_to_cart';
-		payload.nonce = uquickviewObj.nonces.addToCart;
-		payload.product_id = productId;
-		payload.quantity = quantity;
-		payload.is_variation = isVariation;
+		payload['add-to-cart'] = productId;
 
-		if (isVariation) {
-			payload.variations = variationBag;
-			payload.variation_id = variationId;
+		var groupItems;
+
+		// If current product is a grouped products.
+		if (isGrouped) {
+			groupItems = cartForm.querySelectorAll('.woocommerce-grouped-product-list-item');
+			payload.quantity = {};
+
+			groupItems.forEach(function (productItem) {
+				var productId = productItem.id.replace('product-', '');
+				var qtyField = productItem.querySelector('input.qty');
+
+				payload.quantity[productId] = qtyField ? qtyField.value : 0;
+			});
+		} else {
+			payload.product_id = productId;
+			payload.quantity = qtyField ? qtyField.value : 0;
 		}
 
-		$.ajax(
-			{
-				url: uquickviewObj.ajaxurl,
-				type: 'post',
-				dataType: 'json',
-				data: payload
+		var variationFields;
+		var variationIdField;
+
+		// If current product is a variable product.
+		if (isVariable) {
+			variationIdField = cartForm.querySelector('[name="variation_id"]');
+			variationFields = cartForm.querySelectorAll('.variations .value select[data-attribute_name]');
+
+			payload.variation_id = variationIdField ? variationIdField.value : 0;
+
+			variationFields.forEach(function (field) {
+				payload[field.name] = field.value;
+			});
+		}
+
+		$.ajax({
+			url: uquickviewObj.ajaxurl,
+			type: 'post',
+			dataType: 'json',
+			data: payload
+		}).done(function (response) {
+			if (!response) return;
+
+			// Redirect to cart option when necessary.
+			if (wc_add_to_cart_params.cart_redirect_after_add === 'yes' && uquickviewObj.cart_redirect_after_add) {
+				window.location = wc_add_to_cart_params.cart_url;
+				return;
 			}
-		).done(function (r) {
+
+			var $defaultAddToCartButton;
+
+			if (isGrouped) {
+				$defaultAddToCartButton = $('.product .product_type_grouped[data-product_id="' + productId + '"]');
+			} else {
+				$defaultAddToCartButton = $('.product .add_to_cart_button[data-product_id="' + productId + '"]');
+			}
+
+			// Trigger event so themes can refresh other areas.
 			$(document.body).trigger('wc_fragment_refresh');
-
-			var $defaultAddToCartButton = $('.product .add_to_cart_button[data-product_id="' + productId + '"]');
-
 			$(document.body).trigger('added_to_cart', [{}, '', $defaultAddToCartButton]);
 		}).fail(function (jqXHR) {
 			console.error(buildErrorMsg(jqXHR));
@@ -219,9 +288,75 @@
 		});
 	}
 
+	/**
+	 * Add to cart for simple product type.
+	 *
+	 * This function uses Woocommerce's default ajax `add_to_cart` handler.
+	 * The handler is `add_to_cart` function inside class-wc-ajax.php file.
+	 * 
+	 * @see wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.js
+	 * @see wp-content/plugins/woocommerce/includes/class-wc-ajax.php
+	 * 
+	 * @param HTMLElement product The product area inside quick view modal.
+	 */
+	ajax.addToCart.simpleProduct = function (product) {
+		if (state.isRequesting) return;
+		state.isRequesting = true;
+
+		var button = product.querySelector('.single_add_to_cart_button');
+		loading.start(button);
+
+		var cartForm = product.querySelector('form.cart');
+		var addToCartField = cartForm.querySelector('[name="add-to-cart"]');
+		var qtyField = cartForm.querySelector('[name="quantity"]');
+
+		var productId = addToCartField.value;
+
+		/**
+		 * Simple product type payload format:
+		 * {
+		 * 		product_id: 200,
+		 * 		quantity: 1
+		 * }
+		 */
+		$.ajax({
+			url: wc_add_to_cart_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart'),
+			type: 'post',
+			dataType: 'json',
+			data: {
+				product_id: productId,
+				quantity: qtyField.value
+			}
+		}).done(function (response) {
+			if (!response) return;
+
+			if (response.error && response.product_url) {
+				window.location = response.product_url;
+				return;
+			}
+
+			// Redirect to cart option when necessary.
+			if (wc_add_to_cart_params.cart_redirect_after_add === 'yes' && uquickviewObj.cart_redirect_after_add) {
+				window.location = wc_add_to_cart_params.cart_url;
+				return;
+			}
+
+			var $defaultAddToCartButton = $('.product .add_to_cart_button[data-product_id="' + productId + '"]');
+
+			// Trigger event so themes can refresh other areas.
+			$(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $defaultAddToCartButton]);
+		}).fail(function (jqXHR) {
+			console.error(buildErrorMsg(jqXHR));
+		}).always(function () {
+			loading.stop(button);
+			closeQuickViewPopup();
+			state.isRequesting = false;
+		});
+	};
+
 	function buildErrorMsg(jqXHR) {
 		var msg = 'Error ' + jqXHR.status.toString() + ' (' + jqXHR.statusText + ')';
-		msg = jqXHR.responseJSON.data ? msg + ': ' + jqXHR.responseJSON.data : msg;
+		msg = jqXHR.responseJSON && jqXHR.responseJSON.data ? msg + ': ' + jqXHR.responseJSON.data : msg;
 
 		return msg;
 	}

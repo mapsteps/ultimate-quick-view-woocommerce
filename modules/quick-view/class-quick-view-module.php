@@ -68,6 +68,9 @@ class Quick_View_Module extends Base_Module {
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_styles' ), 20 );
 		add_action( 'wp_enqueue_scripts', array( self::get_instance(), 'frontend_scripts' ) );
 
+		// Prevent redirection inside `uquickview_add_to_cart` ajax request.
+		add_filter( 'wp_redirect', array( self::get_instance(), 'prevent_redirection' ), 20, 2 );
+
 		$this->setup_ajax();
 
 		// The module output.
@@ -96,6 +99,24 @@ class Quick_View_Module extends Base_Module {
 	}
 
 	/**
+	 * Prevent redirection inside `uquickview_add_to_cart` ajax request.
+	 *
+	 * @param string $location The existing redirection url.
+	 * @param int    $status The redirection http status.
+	 *
+	 * @return string The modified redirection url.
+	 */
+	public function prevent_redirection( $location, $status ) {
+
+		if ( ! wp_doing_ajax() || ! isset( $_POST['action'] ) || 'uquickview_add_to_cart' !== $_POST['action'] ) {
+			return $location;
+		}
+
+		return false;
+
+	}
+
+	/**
 	 * Enqueue frontend styles.
 	 */
 	public function frontend_styles() {
@@ -111,17 +132,10 @@ class Quick_View_Module extends Base_Module {
 
 		wp_enqueue_script( 'uquickview-quick-view', $this->url . '/assets/js/quick-view.js', array( 'jquery' ), ULTIMATE_QUICK_VIEW_PLUGIN_VERSION, true );
 
-		wp_localize_script(
+		wp_add_inline_script(
 			'uquickview-quick-view',
-			'uquickviewObj',
-			array(
-				'loader'  => ULTIMATE_QUICK_VIEW_PLUGIN_URL . '/assets/images/loader.gif',
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'nonces'  => array(
-					'getQuickview' => wp_create_nonce( 'uquickview_get_product_quickview' ),
-					'addToCart'    => wp_create_nonce( 'uquickview_add_to_cart' ),
-				),
-			)
+			'var uquickviewObj = {ajaxurl: "' . esc_url( admin_url( 'admin-ajax.php' ) ) . '", cart_redirect_after_add: ' . ( isset( $this->settings['cart_redirect_after_add'] ) ? 'true' : 'false' ) . '};',
+			'before'
 		);
 
 	}

@@ -9,124 +9,44 @@ namespace Ultimatequickview\QuickView\Ajax;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use WC_Product_Data_Store_CPT;
-use WC_Product;
-
 /**
- * Class to setup add to cart.
+ * Class to setup ajax add to cart.
  */
-class Add_To_Cart {
+class Add_To_Cart {	
 
 	/**
-	 * Targetted product id.
+	 * Handling the ajax add to cart.
 	 *
-	 * @var int
-	 */
-	private $product_id;
-
-	/**
-	 * The requested quantity.
-	 *
-	 * @var int
-	 */
-	private $quantity;
-
-	/**
-	 * Whether or not the requested product is product variation.
-	 *
-	 * @var int
-	 */
-	private $is_variation;
-
-	/**
-	 * The product's attributes (if it's a variation).
-	 *
-	 * @var int
-	 */
-	private $attributes;
-
-	/**
-	 * Get menu & submenu.
+	 * @see wp-content/plugins/woocommerce/includes/class-wc-form-handler.php
 	 */
 	public function ajax() {
 
-		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+		$quikview_settings         = get_option( 'uquickview_settings' );
+		$woo_should_redirect       = get_option( 'woocommerce_cart_redirect_after_add' );
+		$quickview_should_redirect = isset( $quikview_settings['woocommerce_cart_redirect_after_add'] ) ? true : false;
 
-		if ( ! wp_verify_nonce( $nonce, 'uquickview_add_to_cart' ) ) {
-			wp_send_json_error( __( 'Invalid token', 'ultimate-quick-view-woocommerce' ), 401 );
-		}
+		// If product was successfully added to cart.
+		if ( wc_notice_count( 'success' ) > 0 ) {
+			$notices = wc_get_notices( 'success' );
 
-		if ( ! isset( $_POST['product_id'] ) || ! $_POST['product_id'] ) {
-			wp_send_json_error( __( 'Product id is required', 'ultimate-quick-view-woocommerce' ), 401 );
-		}
-
-		$this->product_id = absint( $_POST['product_id'] );
-
-		if ( ! get_post( $this->product_id ) ) {
-			wp_send_json_error( __( "Product doesn't exist", 'ultimate-quick-view-woocommerce' ), 401 );
-		}
-
-		$this->quantity     = absint( $_POST['quantity'] );
-		$this->is_variation = isset( $_POST['is_variation'] ) ? absint( $_POST['is_variation'] ) : 0;
-		$this->attributes   = isset( $_POST['attributes'] ) ? $_POST['attributes'] : array();
-
-		foreach ( $this->attributes as $attribute_key => $attribute_value ) {
-			$this->attributes[ $attribute_key ] = sanitize_text_field( $attribute_value );
-		}
-
-		$this->save();
-
-	}
-
-	/**
-	 * Add to cart.
-	 */
-	public function save() {
-
-		try {
-
-			$response = array(
-				'message'    => __( 'Product has been added to cart', 'ultimate-quick-view-woocommerce' ),
-				'product_id' => $this->product_id,
-				'quantity'   => $this->quantity,
-			);
-
-			if ( $this->is_variation ) {
-
-				$variation_id = $this->find_matching_product_variation_id( $this->product_id, $this->attributes );
-
-				$response['attributes']   = $this->attributes;
-				$response['variation_id'] = $variation_id;
-
-				WC()->cart->add_to_cart( $this->product_id, $this->quantity, $variation_id, $this->attributes );
-
-			} else {
-
-				WC()->cart->add_to_cart( $this->product_id, $this->quantity );
-
+			// If we're not going to redirect, then clear all wc notices.
+			if ( 'yes' !== $woo_should_redirect || ! $quickview_should_redirect ) {
+				wc_clear_notices();
 			}
 
-			wp_send_json_success( $response );
-		} catch ( \Exception $e ) {
-			wp_send_json_error( __( 'Something went wrong', 'ultimate-quick-view-woocommerce' ), 500 );
+			wp_send_json_success( $notices );
+		} else {
+			$notice_notices = wc_get_notices( 'notice' );
+			$error_notices  = wc_get_notices( 'error' );
+			$notices        = array_merge( $error_notices, $error_notices );
+
+			// If we're not going to redirect, then clear all wc notices.
+			if ( 'yes' !== $woo_should_redirect || ! $quickview_should_redirect ) {
+				wc_clear_notices();
+			}
+
+			wp_send_json_error( $notices, 401 );
 		}
-
-	}
-
-	/**
-	 * Find matching product variation.
-	 *
-	 * @param int   $product_id The product ID.
-	 * @param array $attributes The attributes.
-	 *
-	 * @return int Matching variation ID or 0.
-	 */
-	public function find_matching_product_variation_id( $product_id, $attributes ) {
-
-		return ( new WC_Product_Data_Store_CPT() )->find_matching_product_variation(
-			new WC_Product( $product_id ),
-			$attributes
-		);
 
 	}
 
