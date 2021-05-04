@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Ultimate Quick View for WooCommerce
  * Description: A neat & clean Quick View plugin for WooCommerce.
- * Version: 1.0
+ * Version: 1.1
  * Author: David Vongries
  * Author URI: https://mapsteps.com
  * Text Domain: ultimate-quick-view-woocommerce
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 define( 'ULTIMATE_QUICK_VIEW_PLUGIN_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'ULTIMATE_QUICK_VIEW_PLUGIN_FILE', rtrim( ULTIMATE_QUICK_VIEW_PLUGIN_DIR . '/ultimate-quick-view-woocommerce.php' ) );
 define( 'ULTIMATE_QUICK_VIEW_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
-define( 'ULTIMATE_QUICK_VIEW_PLUGIN_VERSION', '1.0' );
+define( 'ULTIMATE_QUICK_VIEW_PLUGIN_VERSION', '1.1' );
 
 // Helper classes.
 require __DIR__ . '/helpers/class-array-helper.php';
