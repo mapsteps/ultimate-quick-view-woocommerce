@@ -3,7 +3,7 @@ Contributors: davidvongries
 Tags: WooCommerce, Quick View
 Requires at least: 4.0
 Tested up to: 5.7
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,9 @@ To configure the quick view popup, please navigate to WooCommerce > Quick View.
 2. Ultimate Quick View Settings Page
 
 == Changelog ==
+
+= 1.1 May 04, 2021 =
+* Refactored quick view functionality
 
 = 1.0 April 20, 2021 =
 * Initial Release
