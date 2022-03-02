@@ -2,8 +2,8 @@
 Contributors: davidvongries
 Tags: WooCommerce, Quick View
 Requires at least: 4.0
-Tested up to: 5.8
-Stable tag: 1.1
+Tested up to: 5.9
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,12 +26,12 @@ If you like Ultimate Quick View for WooCommerce make sure to check out our other
 
 * **[Page Builder Framework](https://wp-pagebuilderframework.com/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=wpbf)** - A fast & minimalistic WordPress theme designed for the new WordPress era.
 * **[Ultimate Dashboard](https://ultimatedashboard.io/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=udb)** - The #1 WordPress plugin to customize your WordPress dashboard and admin area.
-* **[WP Swift Control](https://wpswiftcontrol.com/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=swiftcontrol)** - The plugin to make your clients enjoy WordPress. It replaces the default admin bar to provide the best possible user experience when editing & navigating a website.
+* **[Better Admin Bar](https://betteradminbar.com/?utm_source=ultimate_quick_view&utm_medium=repository&utm_campaign=bab)** - The plugin to make your clients enjoy WordPress. It replaces the default admin bar to provide the best possible user experience when editing & navigating a website.
 
 == Installation ==
 1. Download the ultimate-quick-view-woocommerce.zip file to your computer.
 1. Unzip the file.
-1. Upload the swift-control folder to your `/wp-content/plugins/` directory.
+1. Upload the ultimate-quick-view-woocommerce folder to your `/wp-content/plugins/` directory.
 1. Activate the plugin through the *Plugins* widget in WordPress.
 
 == Frequently Asked Questions ==
@@ -43,6 +43,10 @@ To configure the quick view popup, please navigate to WooCommerce > Quick View.
 2. Ultimate Quick View Settings Page
 
 == Changelog ==
+
+= 1.1.1 March 02, 2022 =
+* Updated description
+* Tested up to WordPress 5.9
 
 = 1.1 May 04, 2021 =
 * Refactored quick view functionality
